@@ -1,0 +1,21 @@
+{
+    "private": true,
+    "scripts": {
+        "dev": "vite",
+        "build": "vite build"
+    },
+    "devDependencies": {
+        "axios": "^1.1.2",
+        "laravel-vite-plugin": "^0.7.2",
+        "vite": "^4.5.9"
+    },
+    "dependencies": {
+        "@babel/core": "^7.26.7",
+        "@babel/preset-env": "^7.26.7",
+        "jquery": "^3.7.1",
+        "jquery-ui": "^1.13.2",
+        "jquery-ui-dist": "^1.13.2",
+        "owl.carousel": "^2.3.4",
+        "toastr": "^2.1.4"
+    }
+}

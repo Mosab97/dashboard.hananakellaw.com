@@ -1,0 +1,15 @@
+{
+  "member_name": {
+    "ar": "تست",
+    "en": "test"
+  },
+  "school_name": {
+    "ar": "مدرسة تست",
+    "en": "school test"
+  },
+  "phone": "0592741034",
+  "country_code": "+972",
+  "email": "asdasdasd",
+  "password": "123456789",
+  "password_confirmation": "123456789"
+}
