@@ -76,6 +76,18 @@ class MenuSeeder extends Seeder
             'permission_name' => $config_sliders['permissions']['view'],
             'route' => $config_sliders['full_route_name'] . '.index',
         ];
+
+        $Menu[] = [
+
+            'name' => t(config('modules.services.plural_name'), [], 'ar'),
+            'name_en' => config('modules.services.plural_name'),
+            'name_he' => config('modules.services.plural_name'),
+            'route' => null,
+            'icon_svg' => '<i class="fas fa-cogs"></i>', // FontAwesome icon for sliders
+            'order' => 5,
+            'permission_name' => config('modules.services.permissions.view'),
+            'route' => config('modules.services.full_route_name') . '.index',
+        ];
         $Menu[] = [
             'name' => t($config_sucess_stories['plural_name'], [], 'ar'),
             'name_en' => $config_sucess_stories['plural_name'],

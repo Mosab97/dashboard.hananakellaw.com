@@ -1,23 +1,6 @@
 <?php
 
-use App\Http\Controllers\CP\Attachments\AttachmentController;
-use App\Http\Controllers\CP\Notify\NotifyController;
-use App\Http\Controllers\CP\Restaurant\ProductController;
-use App\Http\Controllers\CP\Restaurant\ProductSizeController;
-use App\Http\Controllers\CP\Restaurant\SizeController;
-use App\Http\Controllers\CP\Restaurant\SliderController;
-use App\Http\Controllers\CP\Restaurant\SucessStoryController;
-use App\Http\Controllers\CP\Restaurant\VideoController;
-use App\Http\Controllers\CP\School\ClassroomController;
-use App\Http\Controllers\CP\School\SchoolController;
-use App\Http\Controllers\CP\School\SchoolSubscriptionController;
-use App\Http\Controllers\CP\School\StudentController;
-use App\Http\Controllers\CP\School\TeacherController;
-use App\Http\Controllers\CP\Settings\GeneralSettingController;
-use App\Http\Controllers\CP\Settings\OnboardingController;
-use App\Http\Controllers\CP\Settings\UltraMsgInstanceController;
-use App\Http\Controllers\CP\Subscription\SubscriptionController;
-use App\Http\Controllers\CP\Subscription\SubscriptionPricingController;
+
 
 return [
 
@@ -50,51 +33,14 @@ return [
 
                 'plural_name' => 'General Settings',
                 'view_path' => 'CP.settings.general.',
-                'controller' => GeneralSettingController::class,
+                'controller' => \App\Http\Controllers\CP\Settings\GeneralSettingController::class,
                 'permissions' => [
                     'view' => 'view_general_settings',
                     'edit' => 'edit_general_settings',
                 ],
             ],
-            'onboardings' => [
-                'table' => 'onboardings',
-                'route' => 'onboardings',
-                'full_route_name' => 'settings.onboardings',
-                'singular_name' => 'Onboarding',
-                'plural_name' => 'Onboardings',
-                'singular_key' => 'onboarding',
-                'plural_key' => 'onboardings',
-                'view_path' => 'CP.settings.onboardings.',
-                'id_field' => 'id',
-                'controller' => OnboardingController::class,
-                'upload_path' => 'onboardings',
-                'permissions' => [
-                    'view' => 'view_onboardings',
-                    'create' => 'create_onboardings',
-                    'edit' => 'edit_onboardings',
-                    'delete' => 'delete_onboardings',
-                ],
-                'children' => [],
-            ],
-            'ultramsg' => [
-                'table' => 'ultra_msg_instances',
-                'route' => 'ultramsg',
-                'full_route_name' => 'settings.ultramsg',
-                'singular_name' => 'UltraMsg Instance',
-                'plural_name' => 'UltraMsg Instances',
-                'singular_key' => 'ultramsg_instance',
-                'plural_key' => 'ultramsg_instances',
-                'view_path' => 'CP.settings.ultramsg.',
-                'id_field' => 'id',
-                'controller' => UltraMsgInstanceController::class,
-                'upload_path' => 'ultramsg',
-                'permissions' => [
-                    'view' => 'view_ultramsg_instances',
-                    'create' => 'create_ultramsg_instances',
-                    'edit' => 'edit_ultramsg_instances',
-                    'delete' => 'delete_ultramsg_instances',
-                ],
-            ],
+
+
 
         ],
     ],
@@ -107,9 +53,9 @@ return [
         'plural_name' => 'Categories',
         'singular_key' => 'category',
         'plural_key' => 'categories',
-        'view_path' => 'CP.restaurants_module.categories.',
+        'view_path' => 'CP.categories.',
         'id_field' => 'id',
-        'controller' => \App\Http\Controllers\CP\Restaurant\CategoryController::class,
+        'controller' => \App\Http\Controllers\CP\CategoryController::class,
         'upload_path' => 'categories',
         'permissions' => [
             'view' => 'view_categories',
@@ -127,15 +73,35 @@ return [
         'plural_name' => 'Sliders',
         'singular_key' => 'slider',
         'plural_key' => 'sliders',
-        'view_path' => 'CP.restaurants_module.sliders.',
+        'view_path' => 'CP.sliders.',
         'id_field' => 'id',
-        'controller' => SliderController::class,
+        'controller' => \App\Http\Controllers\CP\SliderController::class,
         'upload_path' => 'sliders',
         'permissions' => [
             'view' => 'view_sliders',
             'create' => 'create_sliders',
             'edit' => 'edit_sliders',
             'delete' => 'delete_sliders',
+        ],
+    ],
+
+    'services' => [
+        'table' => 'services',
+        'route' => 'services',
+        'full_route_name' => 'services',
+        'singular_name' => 'Service',
+        'plural_name' => 'Services',
+        'singular_key' => 'service',
+        'plural_key' => 'services',
+        'view_path' => 'CP.services.',
+        'id_field' => 'id',
+        'controller' => \App\Http\Controllers\CP\ServiceController::class,
+        'upload_path' => 'services',
+        'permissions' => [
+            'view' => 'view_services',
+            'create' => 'create_services',
+            'edit' => 'edit_services',
+            'delete' => 'delete_services',
         ],
     ],
 
@@ -147,9 +113,9 @@ return [
         'plural_name' => 'Sucess Stories',
         'singular_key' => 'sucess_story',
         'plural_key' => 'sucess_stories',
-        'view_path' => 'CP.restaurants_module.sucess_stories.',
+        'view_path' => 'CP.sucess_stories.',
         'id_field' => 'id',
-        'controller' => SucessStoryController::class,
+        'controller' => \App\Http\Controllers\CP\SucessStoryController::class,
         'upload_path' => 'sucess_stories',
         'permissions' => [
             'view' => 'view_sucess_stories',
@@ -166,9 +132,9 @@ return [
         'plural_name' => 'Videos',
         'singular_key' => 'video',
         'plural_key' => 'videos',
-        'view_path' => 'CP.restaurants_module.videos.',
+        'view_path' => 'CP.videos.',
         'id_field' => 'id',
-        'controller' => VideoController::class,
+        'controller' => \App\Http\Controllers\CP\VideoController::class,
         'upload_path' => 'videos',
         'permissions' => [
             'view' => 'view_videos',
