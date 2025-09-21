@@ -13,7 +13,7 @@ class Video extends Model
 
     public $translatable = ['title', 'description'];
 
-    protected $fillable = ['title', 'description', 'path', 'restaurant_id', 'active'];
+    protected $fillable = ['title', 'description', 'path', 'active'];
 
     protected $casts = [
         'active' => 'boolean',

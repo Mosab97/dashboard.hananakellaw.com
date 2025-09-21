@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\Video;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class VideoSeeder extends Seeder
@@ -14,13 +13,11 @@ class VideoSeeder extends Seeder
     public function run(): void
     {
         Video::create([
-            'restaurant_id' => getFirstRestaurant()->id,
             'title' => 'Video 1',
             'description' => 'This is a test description',
             'path' => 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
         ]);
         Video::create([
-            'restaurant_id' => getFirstRestaurant()->id,
             'title' => 'Video 2',
             'description' => 'This is a test description',
             'path' => 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',

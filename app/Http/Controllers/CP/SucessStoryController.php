@@ -4,7 +4,6 @@ namespace App\Http\Controllers\CP;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CP\SucessStoryRequest;
-use App\Models\Restaurant;
 use App\Models\SucessStory;
 use App\Services\Filters\SucessStoryFilterService;
 use Illuminate\Http\Request;
@@ -41,7 +40,6 @@ class SucessStoryController extends Controller
 
         if ($request->isMethod('POST')) {
             $items = $this->_model->query()
-                ->where('restaurant_id', getFirstRestaurant()->id)
                 ->latest($this->config['table'].'.updated_at');
 
             if ($request->input('params')) {
@@ -111,7 +109,6 @@ class SucessStoryController extends Controller
         try {
             $validatedData = $request->validated();
             $id = $request->input($this->config['id_field']);
-            $validatedData['restaurant_id'] = getFirstRestaurant()->id ?? null;
 
             if (! empty($id)) {
                 $result = SucessStory::findOrFail($id);
@@ -180,7 +177,6 @@ class SucessStoryController extends Controller
 
         // Add data lists needed for forms
         if (in_array($action, ['create', 'edit'])) {
-            $data['restaurants_list'] = Restaurant::active()->get();
         }
 
         return $data;

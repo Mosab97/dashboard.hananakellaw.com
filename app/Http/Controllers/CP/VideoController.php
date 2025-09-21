@@ -4,7 +4,6 @@ namespace App\Http\Controllers\CP;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CP\VideoRequest;
-use App\Models\Restaurant;
 use App\Models\Video;
 use App\Services\Filters\VideoFilterService;
 use Illuminate\Http\Request;
@@ -41,7 +40,6 @@ class VideoController extends Controller
 
         if ($request->isMethod('POST')) {
             $items = $this->_model->query()
-                ->where('restaurant_id', getFirstRestaurant()->id)
                 ->latest($this->config['table'].'.updated_at');
 
             if ($request->input('params')) {
@@ -115,7 +113,6 @@ class VideoController extends Controller
         try {
             $validatedData = $request->validated();
             $id = $request->input($this->config['id_field']);
-            $validatedData['restaurant_id'] = getFirstRestaurant()->id ?? null;
 
             if (! empty($id)) {
                 $result = Video::findOrFail($id);
@@ -184,7 +181,6 @@ class VideoController extends Controller
 
         // Add data lists needed for forms
         if (in_array($action, ['create', 'edit'])) {
-            $data['restaurants_list'] = Restaurant::active()->get();
         }
 
         return $data;

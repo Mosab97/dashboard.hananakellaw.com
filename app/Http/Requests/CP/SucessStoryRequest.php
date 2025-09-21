@@ -33,7 +33,6 @@ class SucessStoryRequest extends FormRequest
             'description.ar' => 'required|string|max:255',
             'active' => 'boolean',
             'order' => 'nullable|integer|min:0',
-            'restaurant_id' => 'required|exists:restaurants,id',
         ];
 
         return $rules;
@@ -75,7 +74,6 @@ class SucessStoryRequest extends FormRequest
     {
         $this->merge([
             'active' => $this->has('active') ? true : false,
-            'restaurant_id' => getFirstRestaurant()->id ?? null,
         ]);
     }
 }

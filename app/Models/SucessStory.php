@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Models\Restaurant;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -14,15 +13,11 @@ class SucessStory extends Model
 
     public $translatable = ['owner_name', 'description'];
 
-    protected $fillable = ['owner_name', 'rate', 'restaurant_id', 'description', 'active'];
+    protected $fillable = ['owner_name', 'rate', 'description', 'active'];
 
     protected $casts = [
         'rate' => 'integer',
         'active' => 'boolean',
     ];
 
-    public function restaurant()
-    {
-        return $this->belongsTo(Restaurant::class);
-    }
 }

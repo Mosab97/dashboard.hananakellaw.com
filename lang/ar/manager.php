@@ -1270,6 +1270,6 @@ return [
   'Arabic short description must be a string' => 'الوصف القصير بالعربي يجب أن يكون عبارة عن سلسلة',
   'Service Icon' => 'أيقونة الخدمة',
   'Upload service icon (optional, max 2MB)' => 'رفع أيقونة الخدمة (اختياري، أقصى 2MB)',
-  'Delete Icon' => 'Delete Icon',
-  'Delete icon will delete the icon from the database' => 'Delete icon will delete the icon from the database',
+  'Delete Icon' => 'حذف الأيقونة',
+  'Delete icon will delete the icon from the database' => 'حذف الأيقونة سيحذف الأيقونة من القاعدة',
 ];
