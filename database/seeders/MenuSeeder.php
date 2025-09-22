@@ -48,21 +48,10 @@ class MenuSeeder extends Seeder
 
             ],
         ];
-        // Add restaurant menu
-        $config_categories = config('modules.categories');
         $config_sliders = config('modules.sliders');
         $config_sucess_stories = config('modules.sucess_stories');
         $config_videos = config('modules.videos');
-        $Menu[] = [
-            'name' => t($config_categories['plural_name'], [], 'ar'),
-            'name_en' => $config_categories['plural_name'],
-            'name_he' => $config_categories['plural_name'],
-            'route' => null,
-            'icon_svg' => '<i class="fas fa-th-list"></i>', // FontAwesome icon for categories
-            'order' => 5,
-            'permission_name' => $config_categories['permissions']['view'],
-            'route' => $config_categories['full_route_name'] . '.index',
-        ];
+
 
 
         $Menu[] = [

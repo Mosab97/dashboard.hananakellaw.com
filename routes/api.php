@@ -19,7 +19,4 @@ Route::prefix('v1')->middleware('throttle:4,1')->group(function () {});
 
 Route::prefix('v1')->middleware(['localization'])->group(function () {
     Route::get('/home', [HomeController::class, 'home']);
-    Route::get('/constants', [HomeController::class, 'getConstants']);
-    Route::get('/products', [ProductController::class, 'index']);
-    Route::get('/products/{product}', [ProductController::class, 'show']);
 });

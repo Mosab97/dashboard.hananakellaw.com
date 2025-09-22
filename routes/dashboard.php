@@ -12,14 +12,6 @@ Route::group(['prefix' => 'dashboard'], function () {
     Route::get('/login', [LoginController::class, 'signIn'])->name('login');
     Route::post('/authenticate', [LoginController::class, 'authenticate'])->name('authenticate');
 
-    Route::post('getSelect', [\App\Http\Controllers\Controller::class, 'getSelect'])->name('getSelect');
-    Route::post('getSelect2Details', [DashboardController::class, 'getSelect2Details'])->name('getSelect2Details'); // this is a v2 of getSelect (we should update the getSelect later to be like getSelect2)
-    Route::post('getSelect2', [DashboardController::class, 'getSelect2'])->name('getSelect2'); // this is a v2 of getSelect (we should update the getSelect later to be like getSelect2)
-    Route::post('getSelect2WithoutSearchOrPaginate', [DashboardController::class, 'getSelect2WithoutSearchOrPaginate'])->name('getSelect2WithoutSearchOrPaginate'); // this is a v2 of getSelect (we should update the getSelect later to be like getSelect2)
-    Route::post('/store-objective', [DashboardController::class, 'storeObjective'])->name('store-objective');
-    Route::post('/get-objectives', [DashboardController::class, 'getObjectives'])->name('get-objectives');
-    Route::delete('attachments/{attachment}', [DashboardController::class, 'remove_attachment'])->name('remove-attachment');
-
     Route::middleware(['auth'])->group(function () {
         // User Profile Routes
         Route::prefix('user')->name('user.')->group(function () {

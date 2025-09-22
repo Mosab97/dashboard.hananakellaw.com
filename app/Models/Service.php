@@ -11,7 +11,7 @@ class Service extends Model
 {
     use HasFactory, HasTranslations, SoftDeletes;
 
-    protected $fillable = ['title', 'description', 'short_description', 'icon', 'link', 'active'];
+    protected $fillable = ['title', 'description', 'short_description', 'features', 'icon', 'link', 'active'];
 
     protected $translatable = ['title', 'description', 'short_description'];
 
@@ -19,6 +19,7 @@ class Service extends Model
         'title' => 'array',
         'description' => 'array',
         'short_description' => 'array',
+        'features' => 'array',
         'active' => 'boolean',
     ];
 

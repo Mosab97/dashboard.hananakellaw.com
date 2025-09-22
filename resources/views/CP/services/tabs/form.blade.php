@@ -68,6 +68,9 @@
                     </div>
                 @endforeach
             </div>
+
+
+
             <div class="row">
                 <!-- Category Icon Upload -->
                 <div class="col-md-6">
@@ -140,30 +143,70 @@
 
             </div>
 
+
+
+            {{-- Repeater for features --}}
+            <div class="row">
+                <div class="col-md-12">
+                    <label class="fw-semibold fs-6 mb-2">
+                        {{ t('Features') }}
+                    </label>
+                    <div class="form-group repeater">
+                        <div data-repeater-list="features" class="service-repeater">
+                            @php
+                                $features_old = is_array($_model->features) ? $_model->features : [$_model->features];
+                                $features = old('features', $features_old);
+                                // dd($features);
+                            @endphp
+                            @foreach ($features as $feature)
+                                <div data-repeater-item class="mb-2">
+                                    <div class="row">
+                                        <div class="col-10">
+                                            <textarea name="text" class="form-control" placeholder="{{ t('Enter feature') }}" rows="3">{{ is_array($feature) ? $feature['text'] : $feature }}</textarea>
+                                        </div>
+                                        <div class="col-2 d-flex align-items-center">
+                                            <button type="button" data-repeater-delete
+                                                class="btn btn-outline-danger btn-sm">
+                                                <i class="fa fa-trash"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+
+                        </div>
+                        <button type="button" data-repeater-create class="btn btn-primary btn-sm">
+                            <i class="feather icon-plus"></i> {{ t('Add Feature') }}
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+
         </div>
     </div>
 </div>
+@push('scripts')
+    <script src="{{ asset('js/repeater/jquery.repeater.min.js') }}"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            $('.repeater').repeater({
+                show: function() {
+                    $(this).slideDown();
+                },
 
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        // Handle image file preview
-        document.getElementById('icon').addEventListener('change', function(e) {
-            const file = e.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    document.getElementById('icon-preview').src = e.target.result;
-                    document.getElementById('icon-preview-section').style.display = 'block';
-                };
-                reader.readAsDataURL(file);
-            }
+                hide: function(deleteElement) {
+                    if (confirm('Are you sure you want to delete this element?')) {
+                        $(this).slideUp(deleteElement);
+                    }
+                },
+
+                ready: function(setIndexes) {
+                    // $dragAndDrop.on('drop', setIndexes);
+                },
+                isFirstItemUndeletable: true
+            })
+
         });
-
-
-
-        // Initialize Select2 for restaurant dropdown
-        if (typeof KTSelect2 !== 'undefined') {
-            KTSelect2.init();
-        }
-    });
-</script>
+    </script>
+@endpush

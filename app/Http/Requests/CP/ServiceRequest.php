@@ -33,9 +33,10 @@ class ServiceRequest extends FormRequest
             'short_description' => 'nullable|array',
             'short_description.he' => 'nullable|string|max:255',
             'short_description.ar' => 'nullable|string|max:255',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
+            'icon' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
             'active' => 'boolean',
-            'order' => 'nullable|integer|min:0',
+            'features' => ['required', 'array'],
+            'features.*' => ['nullable', 'string'],
         ];
 
         return $rules;
@@ -48,9 +49,9 @@ class ServiceRequest extends FormRequest
      */
     public function messages()
     {
-        return [
-            'title.required' => t('Slider title is required'),
-            'title.array' => t('Slider title must be provided in multiple languages'),
+        $messages = [
+            'title.required' => t('Title is required'),
+            'title.array' => t('Title must be provided in multiple languages'),
             'title.ar.required' => t('Arabic title is required'),
             'title.he.string' => t('English title must be a string'),
             'title.ar.string' => t('Arabic title must be a string'),
@@ -60,21 +61,40 @@ class ServiceRequest extends FormRequest
             'short_description.array' => t('Short description must be provided in multiple languages'),
             'short_description.en.string' => t('English short description must be a string'),
             'short_description.ar.string' => t('Arabic short description must be a string'),
-            'title.*.max' => t('Slider title must not exceed 255 characters'),
+            'title.*.max' => t('Title must not exceed 255 characters'),
 
-            'image.image' => t('Image must be an image file'),
-            'image.mimes' => t('Image must be a file of type: jpeg, png, jpg, gif, svg, webp'),
-            'image.max' => t('Image file size must not exceed 2MB'),
+            'icon.image' => t('Icon must be an image file'),
+            'icon.mimes' => t('Icon must be a file of type: jpeg, png, jpg, gif, svg, webp'),
+            'icon.max' => t('Icon file size must not exceed 2MB'),
 
             'active.boolean' => t('Active status must be true or false'),
 
+
+            'features.required' => t('At least one feature is required'),
+            'features.*.required' => t('Each feature field is required'),
+
         ];
+        // dd($messages);
+        return $messages;
     }
 
     public function prepareForValidation()
     {
         $this->merge([
             'active' => $this->has('active') ? true : false,
+            'features' => $this->getFeaturesArray(),
         ]);
+        // dd($this->all());
+    }
+
+    /**
+     * Get the features as a simple array for storage
+     *
+     * @return array
+     */
+    public function getFeaturesArray(): array
+    {
+        $features = $this->input('features', []);
+        return array_column($features, 'text');
     }
 }

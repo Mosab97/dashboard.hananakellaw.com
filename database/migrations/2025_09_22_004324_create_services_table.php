@@ -16,6 +16,7 @@ return new class extends Migration
             $table->json('title')->nullable();
             $table->json('description')->nullable();
             $table->json('short_description')->nullable();
+            $table->json('features')->nullable();
             $table->string('icon')->nullable();
             $table->string('link')->nullable();
             $table->boolean('active')->default(true);

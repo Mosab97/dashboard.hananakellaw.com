@@ -11,7 +11,7 @@
                     <h3 class="card-title">{{ t(config('app.name') . ' CRM') }} </h3>
 
                 </div>
-                <div class="card-body">
+                {{-- <div class="card-body">
 
                     <!-- Stats Cards -->
                     <div class="row g-5 g-xl-8 mb-5">
@@ -72,7 +72,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> --}}
             </div>
         </div>
     </div>
