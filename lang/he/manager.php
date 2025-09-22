@@ -1281,4 +1281,5 @@ return [
   'Upload service icon (optional, max 2MB)' => 'Upload service icon (optional, max 2MB)',
   'Delete Icon' => 'Delete Icon',
   'Delete icon will delete the icon from the database' => 'Delete icon will delete the icon from the database',
+  'Hanan CRM' => 'Hanan CRM',
 ];

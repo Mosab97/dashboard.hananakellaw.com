@@ -1272,4 +1272,5 @@ return [
   'Upload service icon (optional, max 2MB)' => 'رفع أيقونة الخدمة (اختياري، أقصى 2MB)',
   'Delete Icon' => 'حذف الأيقونة',
   'Delete icon will delete the icon from the database' => 'حذف الأيقونة سيحذف الأيقونة من القاعدة',
+  'Hanan CRM' => 'Hanan CRM',
 ];
