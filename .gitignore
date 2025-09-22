@@ -27,3 +27,4 @@ public/uploads/
 
 storage/logs/*.log
 storage/logs/*/*.log
+#test
