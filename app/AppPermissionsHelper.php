@@ -63,13 +63,12 @@ class AppPermissionsHelper
         ];
 
 
-        // Category permissions (child of restaurants)
-        $config = config('modules.categories');
+        // About Office permissions (child of restaurants)
+        $config = config('modules.about_office');
         $permissions[$config['plural_name']] = [
             'access' => $config['permissions']['view'],
             'add' => $config['permissions']['create'],
             'edit' => $config['permissions']['edit'],
-            'delete' => $config['permissions']['delete'],
         ];
 
 

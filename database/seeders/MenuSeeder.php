@@ -98,6 +98,17 @@ class MenuSeeder extends Seeder
             'route' => $config_videos['full_route_name'] . '.index',
         ];
 
+        $Menu[] = [
+            'name' => t(config('modules.about_office.plural_name'), [], 'ar'),
+            'name_en' => config('modules.about_office.plural_name'),
+            'name_he' => config('modules.about_office.plural_name'),
+            'route' => null,
+            'icon_svg' => '<i class="fas fa-building"></i>', // FontAwesome icon for videos
+            'order' => 5,
+            'permission_name' => config('modules.about_office.permissions.view'),
+            'route' => config('modules.about_office.full_route_name') . '.index',
+        ];
+
 
         DB::table('menus')->delete();
 

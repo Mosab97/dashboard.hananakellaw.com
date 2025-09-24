@@ -1287,4 +1287,7 @@ return [
   'City is required' => 'City is required',
   'Appointment type is required' => 'Appointment type is required',
   'Appointment type does not exist' => 'Appointment type does not exist',
+  'About Office' => 'About Office',
+  'About Office Details' => 'About Office Details',
+  'About Office updated successfully' => 'About Office updated successfully',
 ];
