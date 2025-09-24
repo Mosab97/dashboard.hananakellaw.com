@@ -20,15 +20,7 @@ class DatabaseSeeder extends Seeder
             RolesAndPermissionsSeeder::class,
             AdminSeeder::class,
             MenuSeeder::class,
-
-            // RestaurantSeeder::class,
-            // CategorySeeder::class,
-            // ProductSeeder::class,
-            // SizeSeeder::class,
-            // ProductSizeSeeder::class,
-            // SliderSeeder::class,
-            // SucessStorySeeder::class,
-            // VideoSeeder::class,
+            AppointmentTypeSeeder::class,
         ]);
     }
 }
