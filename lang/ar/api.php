@@ -518,4 +518,5 @@ return [
     'Holiday deleted successfully' => 'تم حذف العطلة بنجاح',
     'Invalid Hijri date format: Invalid date format. Expected: d/m/yyyy' => 'صيغة التاريخ الهجري غير صحيحة. المتوقع: d/m/yyyy',
     'Invalid date format. Expected: d/m/yyyy' => 'صيغة التاريخ غير صحيحة. المتوقع: d/m/yyyy',
+  'Appointment booked successfully' => 'Appointment booked successfully',
 ];

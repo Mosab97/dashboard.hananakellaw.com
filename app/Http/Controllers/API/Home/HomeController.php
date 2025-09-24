@@ -14,6 +14,9 @@ use App\Models\Video;
 use App\Models\SucessStory;
 use App\Models\AppointmentType;
 use App\Http\Resources\API\AppointmentTypeResource;
+use App\Http\Requests\Api\BookAppointmentRequest;
+use App\Http\Resources\API\BookAppointmentResource;
+use App\Models\BookAppointment;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -33,5 +36,11 @@ class HomeController extends Controller
     public function appointmentTypes(Request $request)
     {
         return apiSuccess(AppointmentTypeResource::collection(AppointmentType::where('active', true)->get()));
+    }
+
+    public function bookAppointment(BookAppointmentRequest $request)
+    {
+
+        return apiSuccess(new BookAppointmentResource(BookAppointment::create($request->validated())), api('Appointment booked successfully'));
     }
 }

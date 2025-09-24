@@ -1283,4 +1283,8 @@ return [
   'Title must not exceed 255 characters' => 'يجب أن يكون أقل من 255 حرف',
   'Icon must be a file of type: jpeg, png, jpg, gif, svg, webp' => 'يجب أن يكون ملف صورة',
   'Icon file size must not exceed 2MB' => 'يجب أن يكون أقل من 2MB',
+  'Phone is required' => 'Phone is required',
+  'City is required' => 'City is required',
+  'Appointment type is required' => 'Appointment type is required',
+  'Appointment type does not exist' => 'Appointment type does not exist',
 ];

@@ -1294,4 +1294,8 @@ return [
   'Title must not exceed 255 characters' => 'Title must not exceed 255 characters',
   'Icon must be a file of type: jpeg, png, jpg, gif, svg, webp' => 'Icon must be a file of type: jpeg, png, jpg, gif, svg, webp',
   'Icon file size must not exceed 2MB' => 'Icon file size must not exceed 2MB',
+  'Phone is required' => 'Phone is required',
+  'City is required' => 'City is required',
+  'Appointment type is required' => 'Appointment type is required',
+  'Appointment type does not exist' => 'Appointment type does not exist',
 ];

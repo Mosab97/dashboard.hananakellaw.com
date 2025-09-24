@@ -20,5 +20,6 @@ Route::prefix('v1')->middleware('throttle:4,1')->group(function () {});
 Route::prefix('v1')->middleware(['localization'])->group(function () {
     Route::get('/home', [HomeController::class, 'home']);
     Route::get('/appointment-types', [HomeController::class, 'appointmentTypes']);
+    Route::post('/book-appointment', [HomeController::class, 'bookAppointment']);
 
 });
