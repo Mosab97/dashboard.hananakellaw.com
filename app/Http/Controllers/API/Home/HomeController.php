@@ -22,6 +22,8 @@ use App\Http\Resources\API\WhyChooseUsResource;
 use App\Models\WhyChooseUs;
 use App\Models\CustomerRate;
 use App\Http\Resources\API\CustomerRateResource;
+use App\Http\Resources\API\HowWeWorkResource;
+use App\Models\HowWeWork;
 
 class HomeController extends Controller
 {
@@ -42,6 +44,7 @@ class HomeController extends Controller
                 ],
                 'why_choose_us' => WhyChooseUsResource::collection(WhyChooseUs::where('active', true)->get()),
                 'customer_rates' => CustomerRateResource::collection(CustomerRate::where('active', true)->get()),
+                'how_we_works' => HowWeWorkResource::collection(HowWeWork::where('active', true)->get()),
         ]);
     }
 

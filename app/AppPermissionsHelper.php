@@ -97,6 +97,28 @@ class AppPermissionsHelper
             'edit' => $config['permissions']['edit'],
             'delete' => $config['permissions']['delete'],
         ];
+        // how we works permissions (child of restaurants)
+        $config = config('modules.how_we_works');
+        $permissions[$config['plural_name']] = [
+            'access' => $config['permissions']['view'],
+            'add' => $config['permissions']['create'],
+            'edit' => $config['permissions']['edit'],
+            'delete' => $config['permissions']['delete'],
+        ];
+        $config = config('modules.articles_types');
+        $permissions[$config['plural_name']] = [
+            'access' => $config['permissions']['view'],
+            'add' => $config['permissions']['create'],
+            'edit' => $config['permissions']['edit'],
+            'delete' => $config['permissions']['delete'],
+        ];
+        $config = config('modules.articles');
+        $permissions[$config['plural_name']] = [
+            'access' => $config['permissions']['view'],
+            'add' => $config['permissions']['create'],
+            'edit' => $config['permissions']['edit'],
+            'delete' => $config['permissions']['delete'],
+        ];
         // slider permissions (child of restaurants)
         $config = config('modules.services');
         $permissions[$config['plural_name']] = [

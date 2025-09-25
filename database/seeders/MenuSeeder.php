@@ -84,6 +84,36 @@ class MenuSeeder extends Seeder
             'permission_name' => config('modules.customer_rates.permissions.view'),
             'route' => config('modules.customer_rates.full_route_name') . '.index',
         ];
+        $Menu[] = [
+            'name' => t(config('modules.how_we_works.plural_name'), [], 'ar'),
+            'name_en' => config('modules.how_we_works.plural_name'),
+            'name_he' => config('modules.how_we_works.plural_name'),
+            'route' => null,
+            'icon_svg' => '<i class="fas fa-tasks"></i>', // FontAwesome icon for sliders
+            'order' => 5,
+            'permission_name' => config('modules.how_we_works.permissions.view'),
+            'route' => config('modules.how_we_works.full_route_name') . '.index',
+        ];
+        $Menu[] = [
+            'name' => t(config('modules.articles_types.plural_name'), [], 'ar'),
+            'name_en' => config('modules.articles_types.plural_name'),
+            'name_he' => config('modules.articles_types.plural_name'),
+            'route' => null,
+            'icon_svg' => '<i class="fas fa-file-alt"></i>', // FontAwesome icon for sliders
+            'order' => 5,
+            'permission_name' => config('modules.articles_types.permissions.view'),
+            'route' => config('modules.articles_types.full_route_name') . '.index',
+        ];
+        $Menu[] = [
+            'name' => t(config('modules.articles.plural_name'), [], 'ar'),
+            'name_en' => config('modules.articles.plural_name'),
+            'name_he' => config('modules.articles.plural_name'),
+            'route' => null,
+            'icon_svg' => '<i class="fas fa-file-alt"></i>', // FontAwesome icon for sliders
+            'order' => 5,
+            'permission_name' => config('modules.articles.permissions.view'),
+            'route' => config('modules.articles.full_route_name') . '.index',
+        ];
 
         $Menu[] = [
 
