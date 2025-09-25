@@ -50,9 +50,11 @@
             <div class="tab-pane fade show active" id="kt_tab_pane_1" role="tabpanel">
                 @include($config['view_path'] . 'tabs.form')
             </div>
-            <div class="tab-pane fade " id="kt_tab_article_contents" role="tabpanel">
-                @include('CP.articles.tabs.article_contents.index')
-            </div>
+            @if ($_model->exists)
+                <div class="tab-pane fade " id="kt_tab_article_contents" role="tabpanel">
+                    @include('CP.articles.tabs.article_contents.index')
+                </div>
+            @endif
         </div>
 
         <div class="d-flex justify-content-end mt-5">
@@ -67,4 +69,3 @@
 
     @include($config['view_path'] . 'scripts.addeditJS')
 @endsection
-
