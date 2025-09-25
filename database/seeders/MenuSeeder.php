@@ -48,22 +48,31 @@ class MenuSeeder extends Seeder
 
             ],
         ];
-        $config_sliders = config('modules.sliders');
-        $config_sucess_stories = config('modules.sucess_stories');
-        $config_videos = config('modules.videos');
 
 
 
         $Menu[] = [
 
-            'name' => t($config_sliders['plural_name'], [], 'ar'),
-            'name_en' => $config_sliders['plural_name'],
-            'name_he' => $config_sliders['plural_name'],
+            'name' => t(config('modules.sliders.plural_name'), [], 'ar'),
+            'name_en' => config('modules.sliders.plural_name'),
+            'name_he' => config('modules.sliders.plural_name'),
             'route' => null,
             'icon_svg' => '<i class="fas fa-sliders-h"></i>', // FontAwesome icon for sliders
             'order' => 5,
-            'permission_name' => $config_sliders['permissions']['view'],
-            'route' => $config_sliders['full_route_name'] . '.index',
+            'permission_name' => config('modules.sliders.permissions.view'),
+            'route' => config('modules.sliders.full_route_name') . '.index',
+        ];
+
+        $Menu[] = [
+
+            'name' => t(config('modules.why_choose_us.plural_name'), [], 'ar'),
+            'name_en' => config('modules.why_choose_us.plural_name'),
+            'name_he' => config('modules.why_choose_us.plural_name'),
+            'route' => null,
+            'icon_svg' => '<i class="fas fa-question"></i>', // FontAwesome icon for sliders
+            'order' => 5,
+            'permission_name' => config('modules.why_choose_us.permissions.view'),
+            'route' => config('modules.why_choose_us.full_route_name') . '.index',
         ];
 
         $Menu[] = [
@@ -78,24 +87,24 @@ class MenuSeeder extends Seeder
             'route' => config('modules.services.full_route_name') . '.index',
         ];
         $Menu[] = [
-            'name' => t($config_sucess_stories['plural_name'], [], 'ar'),
-            'name_en' => $config_sucess_stories['plural_name'],
-            'name_he' => $config_sucess_stories['plural_name'],
+            'name' => t(config('modules.sucess_stories.plural_name'), [], 'ar'),
+            'name_en' => config('modules.sucess_stories.plural_name'),
+            'name_he' => config('modules.sucess_stories.plural_name'),
             'route' => null,
             'icon_svg' => '<i class="fas fa-star"></i>', // FontAwesome icon for sucess stories
             'order' => 5,
-            'permission_name' => $config_sucess_stories['permissions']['view'],
-            'route' => $config_sucess_stories['full_route_name'] . '.index',
+            'permission_name' => config('modules.sucess_stories.permissions.view'),
+            'route' => config('modules.sucess_stories.full_route_name') . '.index',
         ];
         $Menu[] = [
-            'name' => t($config_videos['plural_name'], [], 'ar'),
-            'name_en' => $config_videos['plural_name'],
-            'name_he' => $config_videos['plural_name'],
+            'name' => t(config('modules.videos.plural_name'), [], 'ar'),
+            'name_en' => config('modules.videos.plural_name'),
+            'name_he' => config('modules.videos.plural_name'),
             'route' => null,
             'icon_svg' => '<i class="fas fa-video"></i>', // FontAwesome icon for videos
             'order' => 5,
-            'permission_name' => $config_videos['permissions']['view'],
-            'route' => $config_videos['full_route_name'] . '.index',
+            'permission_name' => config('modules.videos.permissions.view'),
+            'route' => config('modules.videos.full_route_name') . '.index',
         ];
 
         $Menu[] = [

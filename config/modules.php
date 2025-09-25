@@ -84,6 +84,25 @@ return [
             'delete' => 'delete_sliders',
         ],
     ],
+    'why_choose_us' => [
+        'table' => 'why_choose_us',
+        'route' => 'why_choose_us',
+        'full_route_name' => 'why_choose_us',
+        'singular_name' => 'Why Choose Us',
+        'plural_name' => 'Why Choose Us',
+        'singular_key' => 'why_choose_us',
+        'plural_key' => 'why_choose_us',
+        'view_path' => 'CP.why_choose_us.',
+        'id_field' => 'id',
+        'controller' => \App\Http\Controllers\CP\WhyChooseUsController::class,
+        'upload_path' => 'why_choose_us',
+        'permissions' => [
+            'view' => 'view_why_choose_us',
+            'create' => 'create_why_choose_us',
+            'edit' => 'edit_why_choose_us',
+            'delete' => 'delete_why_choose_us',
+        ],
+    ],
 
     'services' => [
         'table' => 'services',

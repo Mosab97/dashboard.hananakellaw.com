@@ -18,7 +18,8 @@ use App\Http\Requests\Api\BookAppointmentRequest;
 use App\Http\Resources\API\BookAppointmentResource;
 use App\Models\BookAppointment;
 use Illuminate\Http\Request;
-
+use App\Http\Resources\API\WhyChooseUsResource;
+use App\Models\WhyChooseUs;
 class HomeController extends Controller
 {
     public function home(Request $request)
@@ -30,6 +31,13 @@ class HomeController extends Controller
             'videos' => VideoResource::collection(Video::where('active', true)->get()),
             'sucess_stories' => SucessStoryResource::collection(SucessStory::where('active', true)->get()),
             'appointment_types' => AppointmentTypeResource::collection(AppointmentType::where('active', true)->get()),
+            'about_office' => [
+                'title' => setting('about_office.title.' . app()->getLocale()),
+                'description' => setting('about_office.description.' . app()->getLocale()),
+                'features' => setting('about_office.features'  ),
+                'image' => asset('storage/' . setting('about_office.image')),
+                ],
+                'why_choose_us' => WhyChooseUsResource::collection(WhyChooseUs::where('active', true)->get()),
         ]);
     }
 
