@@ -20,6 +20,9 @@ use App\Models\BookAppointment;
 use Illuminate\Http\Request;
 use App\Http\Resources\API\WhyChooseUsResource;
 use App\Models\WhyChooseUs;
+use App\Models\CustomerRate;
+use App\Http\Resources\API\CustomerRateResource;
+
 class HomeController extends Controller
 {
     public function home(Request $request)
@@ -38,6 +41,7 @@ class HomeController extends Controller
                 'image' => asset('storage/' . setting('about_office.image')),
                 ],
                 'why_choose_us' => WhyChooseUsResource::collection(WhyChooseUs::where('active', true)->get()),
+                'customer_rates' => CustomerRateResource::collection(CustomerRate::where('active', true)->get()),
         ]);
     }
 

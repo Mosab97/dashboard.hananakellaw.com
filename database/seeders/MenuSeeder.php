@@ -74,6 +74,16 @@ class MenuSeeder extends Seeder
             'permission_name' => config('modules.why_choose_us.permissions.view'),
             'route' => config('modules.why_choose_us.full_route_name') . '.index',
         ];
+        $Menu[] = [
+            'name' => t(config('modules.customer_rates.plural_name'), [], 'ar'),
+            'name_en' => config('modules.customer_rates.plural_name'),
+            'name_he' => config('modules.customer_rates.plural_name'),
+            'route' => null,
+            'icon_svg' => '<i class="fas fa-star"></i>', // FontAwesome icon for sliders
+            'order' => 5,
+            'permission_name' => config('modules.customer_rates.permissions.view'),
+            'route' => config('modules.customer_rates.full_route_name') . '.index',
+        ];
 
         $Menu[] = [
 

@@ -1315,4 +1315,11 @@ return [
   'Edit Why Choose Us' => 'Edit Why Choose Us',
   'Remove Why Choose Us' => 'Remove Why Choose Us',
   'Why Choose Us Deleted Successfully!' => 'Why Choose Us Deleted Successfully!',
+  'Customer Rates' => 'Customer Rates',
+  'Customer Rate- Add new Customer Rate' => 'Customer Rate- Add new Customer Rate',
+  '- Add new Customer Rate' => '- Add new Customer Rate',
+  'Rate must be between 1 and 5' => 'Rate must be between 1 and 5',
+  'Name must be provided in multiple languages' => 'Name must be provided in multiple languages',
+  'Name must not exceed 255 characters' => 'Name must not exceed 255 characters',
+  'Customer Rate Added Successfully!' => 'Customer Rate Added Successfully!',
 ];

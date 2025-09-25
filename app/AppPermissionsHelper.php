@@ -89,6 +89,14 @@ class AppPermissionsHelper
             'edit' => $config['permissions']['edit'],
             'delete' => $config['permissions']['delete'],
         ];
+        // customer rates permissions (child of restaurants)
+        $config = config('modules.customer_rates');
+        $permissions[$config['plural_name']] = [
+            'access' => $config['permissions']['view'],
+            'add' => $config['permissions']['create'],
+            'edit' => $config['permissions']['edit'],
+            'delete' => $config['permissions']['delete'],
+        ];
         // slider permissions (child of restaurants)
         $config = config('modules.services');
         $permissions[$config['plural_name']] = [

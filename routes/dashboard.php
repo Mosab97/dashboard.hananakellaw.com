@@ -78,6 +78,17 @@ Route::group(['prefix' => 'dashboard'], function () {
             Route::delete('{_model}/delete', 'delete')->name('delete')->middleware('permission:' . $config['permissions']['delete']);
             Route::post('/' . $config['singular_key'] . '/{Id?}', 'addedit')->name('addedit')->middleware('permission:' . $config['permissions']['create']);
         });
+        // customer rates child routes
+        $config = config('modules.customer_rates');
+        Route::prefix($config['route'])->name($config['route'] . '.')->controller($config['controller'])->group(function () use ($config) {
+            Route::get('/export', 'export')->name('export')->middleware('permission:' . $config['permissions']['view']);
+            Route::match(['get', 'post'], '/', 'index')->name('index')->middleware('permission:' . $config['permissions']['view']);
+            Route::get('/create', 'create')->name('create')->middleware('permission:' . $config['permissions']['create']);
+            Route::get('/{_model}/edit', 'edit')->name('edit')->middleware('permission:' . $config['permissions']['edit']);
+            Route::get('/{_model}/details', 'details')->name('details')->middleware('permission:' . $config['permissions']['edit']);
+            Route::delete('{_model}/delete', 'delete')->name('delete')->middleware('permission:' . $config['permissions']['delete']);
+            Route::post('/' . $config['singular_key'] . '/{Id?}', 'addedit')->name('addedit')->middleware('permission:' . $config['permissions']['create']);
+        });
         // services child routes
         $config = config('modules.services');
         Route::prefix($config['route'])->name($config['route'] . '.')->controller($config['controller'])->group(function () use ($config) {

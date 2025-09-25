@@ -103,6 +103,25 @@ return [
             'delete' => 'delete_why_choose_us',
         ],
     ],
+    'customer_rates' => [
+        'table' => 'customer_rates',
+        'route' => 'customer_rates',
+        'full_route_name' => 'customer_rates',
+        'singular_name' => 'Customer Rate',
+        'plural_name' => 'Customer Rates',
+        'singular_key' => 'customer_rate',
+        'plural_key' => 'customer_rates',
+        'view_path' => 'CP.customer_rates.',
+        'id_field' => 'id',
+        'controller' => \App\Http\Controllers\CP\CustomerRateController::class,
+        'upload_path' => 'customer_rates',
+        'permissions' => [
+            'view' => 'view_customer_rates',
+            'create' => 'create_customer_rates',
+            'edit' => 'edit_customer_rates',
+            'delete' => 'delete_customer_rates',
+        ],
+    ],
 
     'services' => [
         'table' => 'services',
