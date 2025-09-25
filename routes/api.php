@@ -21,5 +21,6 @@ Route::prefix('v1')->middleware(['localization'])->group(function () {
     Route::get('/home', [HomeController::class, 'home']);
     Route::get('/appointment-types', [HomeController::class, 'appointmentTypes']);
     Route::post('/book-appointment', [HomeController::class, 'bookAppointment']);
+    Route::get('/articles/{article}', [HomeController::class, 'article']);
 
 });
