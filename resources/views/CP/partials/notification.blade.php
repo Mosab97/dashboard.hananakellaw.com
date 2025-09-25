@@ -1,58 +1,5 @@
-{{-- Place this at the top of your form view, before other alerts --}}
-
-{{-- Show Active Subscription Business Exception --}}
-{{-- @dd($errors->has('member_id')) --}}
-@if ($errors->has('member_id'))
-    <div class="alert alert-warning d-flex align-items-center p-5 mb-10">
-        <i class="ki-duotone ki-information-5 fs-2hx text-warning me-4">
-            <span class="path1"></span>
-            <span class="path2"></span>
-            <span class="path3"></span>
-        </i>
-        <div class="d-flex flex-column">
-            <h4 class="mb-1 text-warning">{{ t('Active Subscription Found') }}</h4>
-            <div class="fs-6 fw-semibold">{!! $errors->first('member_id') !!}</div>
-
-            @if (session('active_subscription_exists'))
-                <div class="mt-3 mb-2">
-                    <strong>{{ t('Active Subscription Details:') }}</strong>
-                    <ul class="mb-0">
-                        <li>{{ t('ID') }}: {{ session('active_subscription')['subscription_id'] }}</li>
-                        <li>{{ t('Duration') }}: {{ session('active_subscription')['duration'] }}</li>
-                        <li>{{ t('Start Date') }}: {{ session('active_subscription')['start_date'] }}</li>
-                        <li>{{ t('End Date') }}: {{ session('active_subscription')['end_date'] }}</li>
-                    </ul>
-                </div>
-            @endif
-
-            <div class="mt-3">
-                <a href="{{ session('index_route') ?? route($config['full_route_name'] . '.index') }}"
-                    class="btn btn-sm btn-light-primary me-2">
-                    <i class="ki-duotone ki-list fs-4 me-1">
-                        <span class="path1"></span>
-                        <span class="path2"></span>
-                        <span class="path3"></span>
-                    </i>
-                    {{ t('View All Subscriptions') }}
-                </a>
-
-                @if (session('active_subscription'))
-                    <a href="{{ session('edit_route') ?? route($config['full_route_name'] . '.edit', ['_model' => session('active_subscription')['subscription_id']]) }}"
-                        class="btn btn-sm btn-light-info me-2">
-                        <i class="ki-duotone ki-pencil fs-4 me-1">
-                            <span class="path1"></span>
-                            <span class="path2"></span>
-                        </i>
-                        {{ t('Edit Active Subscription') }}
-                    </a>
-                @endif
-            </div>
-        </div>
-    </div>
-@endif
-
 {{-- Show regular validation errors (only if not showing member_id error) --}}
-@if ($errors->any() && !$errors->has('member_id'))
+@if ($errors->any())
     <div class="alert alert-danger d-flex align-items-center p-5 mb-10">
         <i class="ki-duotone ki-shield-tick fs-2hx text-danger me-4">
             <span class="path1"></span>
@@ -71,7 +18,7 @@
 @endif
 
 {{-- Show success message --}}
-@if (session('status'))
+@if (session('success'))
     <div class="alert alert-success d-flex align-items-center p-5">
         <span class="svg-icon svg-icon-2hx svg-icon-success me-3">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -82,13 +29,13 @@
             </svg>
         </span>
         <div class="d-flex flex-column">
-            <h4 class="mb-1 text-success">{{ session('status') }}</h4>
+            <h4 class="mb-1 text-success">{{ session('success') }}</h4>
         </div>
     </div>
 @endif
 
 {{-- Show single error message --}}
-@if (session('error') && !$errors->has('member_id'))
+@if (session('error'))
     <div class="alert alert-danger d-flex align-items-center p-5">
         <span class="svg-icon svg-icon-2hx svg-icon-danger me-3">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">

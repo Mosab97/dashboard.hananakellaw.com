@@ -1301,4 +1301,5 @@ return [
   'About Office' => 'About Office',
   'About Office Details' => 'About Office Details',
   'About Office updated successfully' => 'About Office updated successfully',
+  'Upload  image (optional, max 2MB)' => 'Upload  image (optional, max 2MB)',
 ];

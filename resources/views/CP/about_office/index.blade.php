@@ -33,8 +33,8 @@
         </div>
     </div>
 
-    <form action="{{ route('about_office.addedit', ['Id' => $_model->id ?? null]) }}" method="POST"
-        id="kt_add_edit_form" enctype="multipart/form-data">
+    <form action="{{ route('about_office.addedit', ['Id' => $_model->id ?? null]) }}" method="POST" id="kt_add_edit_form"
+        enctype="multipart/form-data">
         @csrf
 
         <div class="tab-content" id="myTabContent">
@@ -63,8 +63,7 @@
                                             <input type="text" name="title[{{ $locale }}]"
                                                 class="form-control form-control-solid mb-3 mb-lg-0 validate-required @error("title.$locale") is-invalid @enderror"
                                                 placeholder="{{ t('Enter Name in ' . strtoupper($locale)) }}"
-                                                value="{{ old("title.$locale", $title) }}"
-                                                />
+                                                value="{{ old("title.$locale", $title) }}" />
                                             @error("title.$locale")
                                                 <div class="invalid-feedback">{{ $message }}</div>
                                             @enderror
@@ -83,9 +82,12 @@
                                                 {{ t('Description') }}
                                                 <small>({{ strtoupper($locale) }})</small>
                                             </label>
+                                            @php
+                                                $description = setting('about_office.description.' . $locale);
+                                            @endphp
                                             <textarea name="description[{{ $locale }}]"
                                                 class="form-control form-control-solid mb-3 mb-lg-0 validate-required @error("description.$locale") is-invalid @enderror"
-                                                placeholder="{{ t('Enter Description in ' . strtoupper($locale)) }}">{{ old("description.$locale", isset($_model) ? $_model->getTranslation('description', $locale) : '') }}</textarea>
+                                                placeholder="{{ t('Enter Description in ' . strtoupper($locale)) }}">{{ old("description.$locale", $description) }}</textarea>
                                             @error("description.$locale")
                                                 <div class="invalid-feedback">{{ $message }}</div>
                                             @enderror
@@ -94,48 +96,35 @@
                                 @endforeach
                             </div>
                             <div class="row">
-                                <!-- Category Image Upload -->
+                                <!-- Image Upload -->
                                 <div class="col-md-6">
                                     <div class="fv-row mb-7">
-                                        <label class="fw-semibold fs-6 mb-2">{{ t('Slider Image') }}</label>
+                                        <label class="fw-semibold fs-6 mb-2">{{ t('Image') }}</label>
                                         <input type="file" name="image" id="image"
                                             class="form-control form-control-solid @error('image') is-invalid @enderror"
                                             accept="image/*">
                                         @error('image')
                                             <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
-                                        {{-- @if ($_model->exists && $_model->image)
+                                        @php
+                                            $image = asset('storage/' . setting('about_office.image'));
+                                        @endphp
+                                        @if ($image)
                                             <div class="mt-3">
-                                                <img src="{{ $_model->image_path }}" alt="Current Image"
-                                                    class="img-thumbnail" style="max-width: 100px; max-height: 100px;">
-                                                <p class="text-muted mt-1">{{ t('Current image') }}</p>
+                                            <a href="{{ $image }}" target="_blank">
+                                                <img src="{{ $image }}" alt="Current Image" class="img-thumbnail"
+                                                style="max-width: 100px; max-height: 100px;">
+                                            <p class="text-muted mt-1">{{ t('Current image') }}</p>
+                                            </a>
                                             </div>
-                                        @endif --}}
-                                        <div class="form-text">{{ t('Upload slider image (optional, max 2MB)') }}</div>
+                                        @endif
+                                        <div class="form-text">{{ t('Upload  image (optional, max 2MB)') }}</div>
                                     </div>
                                 </div>
 
 
                             </div>
 
-                            <div class="row">
-                                <!-- Active Status -->
-                                <div class="col-md-6">
-                                    <div class="fv-row mb-7">
-                                        <div class="form-check form-switch form-check-custom form-check-solid">
-                                            <input class="form-check-input" type="checkbox" name="active" id="active"
-                                                value="1"
-                                                {{ old('active', $_model->active ?? true) ? 'checked' : '' }}>
-                                            <label class="form-check-label fw-semibold fs-6" for="active">
-                                                {{ t('Active') }}
-                                            </label>
-                                        </div>
-                                        <div class="form-text">
-                                            {{ t('Inactive sliders will not be displayed to customers') }}</div>
-                                    </div>
-                                </div>
-
-                            </div>
 
                             <!-- Image Preview Section -->
                             <div class="row" id="image-preview-section" style="display: none;">
@@ -150,6 +139,45 @@
                                 </div>
 
                             </div>
+
+                            {{-- Repeater for features --}}
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <label class="fw-semibold fs-6 mb-2">
+                                        {{ t('Features') }}
+                                    </label>
+                                    <div class="form-group repeater">
+                                        <div data-repeater-list="features" class="service-repeater">
+                                            @php
+                                                $features = setting('about_office.features');
+                                                $features_old = is_array($features) ? $features : [$features];
+                                                $features = old('features', $features_old);
+                                                // dd($features);
+                                            @endphp
+                                            @foreach ($features as $feature)
+                                                <div data-repeater-item class="mb-2">
+                                                    <div class="row">
+                                                        <div class="col-10">
+                                                            <textarea name="text" class="form-control" placeholder="{{ t('Enter feature') }}" rows="3">{{ is_array($feature) ? $feature['text'] : $feature }}</textarea>
+                                                        </div>
+                                                        <div class="col-2 d-flex align-items-center">
+                                                            <button type="button" data-repeater-delete
+                                                                class="btn btn-outline-danger btn-sm">
+                                                                <i class="fa fa-trash"></i>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            @endforeach
+
+                                        </div>
+                                        <button type="button" data-repeater-create class="btn btn-primary btn-sm">
+                                            <i class="feather icon-plus"></i> {{ t('Add Feature') }}
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
 
                         </div>
                     </div>
@@ -171,3 +199,29 @@
 
     {{-- @include('CP.about_office.scripts.addeditJS') --}}
 @endsection
+
+
+@push('scripts')
+    <script src="{{ asset('js/repeater/jquery.repeater.min.js') }}"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            $('.repeater').repeater({
+                show: function() {
+                    $(this).slideDown();
+                },
+
+                hide: function(deleteElement) {
+                    if (confirm('Are you sure you want to delete this element?')) {
+                        $(this).slideUp(deleteElement);
+                    }
+                },
+
+                ready: function(setIndexes) {
+                    // $dragAndDrop.on('drop', setIndexes);
+                },
+                isFirstItemUndeletable: true
+            })
+
+        });
+    </script>
+@endpush
