@@ -26,4 +26,9 @@ class Article extends Model
     {
         return $this->belongsTo(ArticleType::class);
     }
+
+    public function article_contents()
+    {
+        return $this->hasMany(ArticleContent::class);
+    }
 }

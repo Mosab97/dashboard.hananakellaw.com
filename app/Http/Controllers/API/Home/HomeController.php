@@ -64,6 +64,6 @@ class HomeController extends Controller
 
     public function article(Article $article)
     {
-        return apiSuccess(new ArticleResource($article->load('article_type')));
+        return apiSuccess(new ArticleResource($article->load('article_type', 'article_contents')));
     }
 }

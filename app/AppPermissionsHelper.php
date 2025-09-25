@@ -119,6 +119,13 @@ class AppPermissionsHelper
             'edit' => $config['permissions']['edit'],
             'delete' => $config['permissions']['delete'],
         ];
+        $config = config('modules.articles.children.article_contents');
+        $permissions[$config['plural_name']] = [
+            'access' => $config['permissions']['view'],
+            'add' => $config['permissions']['create'],
+            'edit' => $config['permissions']['edit'],
+            'delete' => $config['permissions']['delete'],
+        ];
         // slider permissions (child of restaurants)
         $config = config('modules.services');
         $permissions[$config['plural_name']] = [

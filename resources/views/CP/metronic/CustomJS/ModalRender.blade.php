@@ -247,29 +247,29 @@
                 submitButton.setAttribute('data-kt-indicator', 'on');
                 submitButton.disabled = true;
 
-                // Only check total weight if the form has repeater items
-                const hasRepeaterItems = form.querySelector('[data-repeater-item]') !== null;
+                // // Only check total weight if the form has repeater items
+                // const hasRepeaterItems = form.querySelector('[data-repeater-item]') !== null;
 
-                if (hasRepeaterItems) {
-                    const weightInputs = form.querySelectorAll('input[name$="[weight]"]');
-                    const totalWeight = Array.from(weightInputs)
-                        .reduce((sum, input) => sum + (parseInt(input.value) || 0), 0);
+                // if (hasRepeaterItems) {
+                //     const weightInputs = form.querySelectorAll('input[name$="[weight]"]');
+                //     const totalWeight = Array.from(weightInputs)
+                //         .reduce((sum, input) => sum + (parseInt(input.value) || 0), 0);
 
-                    if (totalWeight !== 100) {
-                        Swal.fire({
-                            text: `Total weight must equal 100. Current total: ${totalWeight}`,
-                            icon: "error",
-                            buttonsStyling: false,
-                            confirmButtonText: "Ok, got it!",
-                            customClass: {
-                                confirmButton: "btn btn-primary"
-                            }
-                        });
-                        submitButton.removeAttribute('data-kt-indicator');
-                        submitButton.disabled = false;
-                        return;
-                    }
-                }
+                //     if (totalWeight !== 100) {
+                //         Swal.fire({
+                //             text: `Total weight must equal 100. Current total: ${totalWeight}`,
+                //             icon: "error",
+                //             buttonsStyling: false,
+                //             confirmButtonText: "Ok, got it!",
+                //             customClass: {
+                //                 confirmButton: "btn btn-primary"
+                //             }
+                //         });
+                //         submitButton.removeAttribute('data-kt-indicator');
+                //         submitButton.disabled = false;
+                //         return;
+                //     }
+                // }
 
                 const validationResult = await validator.validate();
                 console.log('Form validation result:', validationResult);

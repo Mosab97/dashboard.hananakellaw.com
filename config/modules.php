@@ -179,23 +179,26 @@ return [
             'delete' => 'delete_articles',
         ],
         'children' => [
-            'table' => 'articles',
-            'route' => 'articles',
-            'full_route_name' => 'articles',
-            'singular_name' => 'Article',
-            'plural_name' => 'Articles',
-            'singular_key' => 'article',
-            'plural_key' => 'articles',
-            'view_path' => 'CP.articles.',
-            'id_field' => 'id',
-            'controller' => \App\Http\Controllers\CP\ArticleController::class,
-            'upload_path' => 'articles',
-            'permissions' => [
-                'view' => 'view_articles',
-                'create' => 'create_articles',
-                'edit' => 'edit_articles',
-                'delete' => 'delete_articles',
-            ],
+            'article_contents' => [
+                'table' => 'article_contents',
+                'route' => 'article_contents',
+                'full_route_name' => 'articles.article_contents',
+                'singular_name' => 'Article Content',
+                'plural_name' => 'Article Contents',
+                'singular_key' => 'article_content',
+                'plural_key' => 'article_contents',
+                'view_path' => 'CP.articles.tabs.article_contents.',
+                'id_field' => 'id',
+                'controller' => \App\Http\Controllers\CP\ArticleContentController::class,
+                'upload_path' => 'article_contents',
+                'permissions' => [
+                    'view' => 'view_article_contents',
+                    'create' => 'create_article_contents',
+                    'edit' => 'edit_article_contents',
+                    'delete' => 'delete_article_contents',
+                ],
+
+            ]
         ]
     ],
 

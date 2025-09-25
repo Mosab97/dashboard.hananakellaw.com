@@ -21,6 +21,7 @@ class ArticleResource extends JsonResource
                     'name' => $this->article_type->name,
                 ];
             }),
+            'article_contents' => $this->whenLoaded('article_contents', ArticleContentResource::collection($this->article_contents)),
         ];
 
         return $fields;

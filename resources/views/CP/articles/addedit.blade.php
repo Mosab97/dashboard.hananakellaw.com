@@ -28,20 +28,30 @@
                             {{ t($config['singular_name']) }}
                         </a>
                     </li>
+                    <li class="nav-item mt-2">
+                        <a class="nav-link text-active-primary ms-0 me-6 px-2 py-5 " data-bs-toggle="tab"
+                            data-bs-target="#kt_tab_article_contents" href="#kt_tab_article_contents">
+                            <span class="svg-icon svg-icon-2 me-2"></span>
+                            {{ t($config['children']['article_contents']['singular_name']) }}
+                        </a>
+                    </li>
                 </ul>
                 <!--end::Navs-->
             </div>
         </div>
     </div>
 
-    <form action="{{ route($config['full_route_name'] . '.addedit', ['Id' => $_model->id ?? null]) }}"
-        method="POST" id="kt_add_edit_form" enctype="multipart/form-data">
+    <form action="{{ route($config['full_route_name'] . '.addedit', ['Id' => $_model->id ?? null]) }}" method="POST"
+        id="kt_add_edit_form" enctype="multipart/form-data">
         @csrf
         <input type="hidden" name="{{ $config['id_field'] }}" value="{{ $_model->id ?? '' }}">
 
         <div class="tab-content" id="myTabContent">
             <div class="tab-pane fade show active" id="kt_tab_pane_1" role="tabpanel">
                 @include($config['view_path'] . 'tabs.form')
+            </div>
+            <div class="tab-pane fade " id="kt_tab_article_contents" role="tabpanel">
+                @include('CP.articles.tabs.article_contents.index')
             </div>
         </div>
 
@@ -57,3 +67,4 @@
 
     @include($config['view_path'] . 'scripts.addeditJS')
 @endsection
+

@@ -1369,4 +1369,13 @@ return [
   'Edit Article' => 'Edit Article',
   'Remove Article' => 'Remove Article',
   'Article Deleted Successfully!' => 'Article Deleted Successfully!',
+  'Article Content' => 'Article Content',
+  'Add Article Content' => 'Add Article Content',
+  'Are you sure you want to delete this element?' => 'Are you sure you want to delete this element?',
+  'Features are required' => 'Features are required',
+  'Features must be provided in multiple languages' => 'Features must be provided in multiple languages',
+  'Article Content Added Successfully!' => 'Article Content Added Successfully!',
+  'Edit Article Content' => 'Edit Article Content',
+  'Remove Article Content' => 'Remove Article Content',
+  'Search Article Contents' => 'Search Article Contents',
 ];
