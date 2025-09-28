@@ -1248,7 +1248,7 @@ return [
   'Delete Image' => 'حذف الصورة',
   'Delete image will delete the image from the database' => 'حذف الصورة سيحذف الصورة من القاعدة',
   'Site Address' => 'العنوان الموقع',
-  'Hanan' => 'هانان',
+  'Hanan' => 'حنان',
   'Image must be a file of type: jpeg, png, jpg, gif, svg, webp' => 'الصورة يجب أن يكون ملف صورة',
   'Search Service' => 'بحث في الخدمات',
   'Add Service' => 'إضافة الخدمة',
