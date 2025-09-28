@@ -28,7 +28,6 @@ class ArticleContentRequest extends FormRequest
             'title.he' => 'nullable|string|max:255',
             'title.ar' => 'required|string|max:255',
             'features' => 'required|array',
-            'features.*' => 'nullable|string',
             'active' => 'boolean',
         ];
 
@@ -56,17 +55,17 @@ class ArticleContentRequest extends FormRequest
 
         ];
     }
-    public function getFeaturesArray(): array
-    {
-        $features = $this->input('features', []);
-        return array_column($features, 'text');
-    }
+    // public function getFeaturesArray(): array
+    // {
+    //     $features = $this->input('features', []);
+    //     return array_column($features, 'text');
+    // }
 
     public function prepareForValidation()
     {
         $this->merge([
             'active' => $this->has('active') ? true : false,
-            'features' => $this->getFeaturesArray(),
+            // 'features' => $this->getFeaturesArray(),
         ]);
     }
 }

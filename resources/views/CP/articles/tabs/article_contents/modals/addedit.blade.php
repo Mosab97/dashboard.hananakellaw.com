@@ -46,6 +46,7 @@
                 </div>
 
 
+
                 {{-- Repeater for features --}}
                 <div class="row">
                     <div class="col-md-12">
@@ -53,19 +54,23 @@
                             {{ t('Features') }}
                         </label>
                         <div class="form-group repeater">
-                            <div data-repeater-list="features" class="article-content-repeater">
+                            <div data-repeater-list="features" class="service-repeater">
                                 @php
                                     $features_old = is_array($_model->features)
                                         ? $_model->features
                                         : [$_model->features];
                                     $features = old('features', $features_old);
-                                    // dd($features);
                                 @endphp
                                 @foreach ($features as $feature)
                                     <div data-repeater-item class="mb-2">
                                         <div class="row">
-                                            <div class="col-10">
-                                                <textarea name="text" class="form-control" placeholder="{{ t('Enter feature') }}" rows="3">{{ is_array($feature) ? $feature['text'] : $feature }}</textarea>
+                                            <div class="col-5">
+                                                <label class="fw-semibold fs-6 mb-2">{{ t('Hebrew Feature') }}</label>
+                                                <textarea name="he" class="form-control" placeholder="{{ t('Enter feature') }}" rows="3">{{ is_array($feature) ? $feature['he'] ?? '' : $feature }}</textarea>
+                                            </div>
+                                            <div class="col-5">
+                                                <label class="fw-semibold fs-6 mb-2">{{ t('Arabic Feature') }}</label>
+                                                <textarea name="ar" class="form-control" placeholder="{{ t('Enter feature') }}" rows="3">{{ is_array($feature) ? $feature['ar'] ?? '' : $feature }}</textarea>
                                             </div>
                                             <div class="col-2 d-flex align-items-center">
                                                 <button type="button" data-repeater-delete
@@ -84,6 +89,8 @@
                         </div>
                     </div>
                 </div>
+
+
                 <div class="row">
 
 
@@ -118,5 +125,3 @@
         </form>
     </div>
 </div>
-
-

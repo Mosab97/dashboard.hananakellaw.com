@@ -12,7 +12,7 @@ class ArticleContentResource extends JsonResource
         $fields = [
             'id' => $this->id,
             'title' => $this->title,
-            'features' => $this->features,
+            'features' => collect($this->features)->pluck(app()->getLocale())->toArray(),
             'created_at' => $this->created_at->format('Y-m-d'),
             'active' => $this->active,
         ];

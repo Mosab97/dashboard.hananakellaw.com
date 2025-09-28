@@ -1378,4 +1378,9 @@ return [
   'Edit Article Content' => 'Edit Article Content',
   'Remove Article Content' => 'Remove Article Content',
   'Search Article Contents' => 'Search Article Contents',
+  'English Feature' => 'English Feature',
+  'Arabic Feature' => 'Arabic Feature',
+  'Each feature field must be an array' => 'Each feature field must be an array',
+  'Hebrew Feature' => 'Hebrew Feature',
+  'Article Content Deleted Successfully!' => 'Article Content Deleted Successfully!',
 ];

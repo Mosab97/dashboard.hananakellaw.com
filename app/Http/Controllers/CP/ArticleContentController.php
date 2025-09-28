@@ -56,7 +56,7 @@ class ArticleContentController extends Controller
                         . ($item->title ?? 'N/A') . '</a>';
                 })
                 ->editColumn('features', function ($item) {
-                    return $item->features ?? 'N/A';
+                    return collect($item->features)->pluck(app()->getLocale())->toArray() ?? 'N/A';
                 })
                 ->editColumn('active', function ($item) {
                     return '<span class="badge badge-light-' . ($item->active ? 'success' : 'danger') . '">'

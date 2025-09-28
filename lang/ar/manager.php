@@ -1375,4 +1375,9 @@ return [
   'Edit Article Content' => 'تعديل محتوى المقال',
   'Remove Article Content' => 'حذف محتوى المقال',
   'Search Article Contents' => 'بحث في محتوى المقال',
+  'English Feature' => 'الخصائص بالإنجليزية',
+  'Arabic Feature' => 'الخصائص بالعربية',
+  'Each feature field must be an array' => 'يجب أن يكون لديك على الأقل خصائص واحدة',
+  'Hebrew Feature' => 'الخصائص بالعبرية',
+  'Article Content Deleted Successfully!' => 'Article Content Deleted Successfully!',
 ];

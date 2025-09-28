@@ -36,7 +36,8 @@ class ServiceRequest extends FormRequest
             'icon' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
             'active' => 'boolean',
             'features' => ['required', 'array'],
-            'features.*' => ['nullable', 'string'],
+            // 'features.en' => ['nullable', 'array'],
+            // 'features.ar' => ['nullable', 'array'],
         ];
 
         return $rules;
@@ -71,7 +72,10 @@ class ServiceRequest extends FormRequest
 
 
             'features.required' => t('At least one feature is required'),
-            'features.*.required' => t('Each feature field is required'),
+            'features.en.required' => t('Each feature field is required'),
+            'features.ar.required' => t('Each feature field is required'),
+            'features.en.array' => t('Each feature field must be an array'),
+            'features.ar.array' => t('Each feature field must be an array'),
 
         ];
         // dd($messages);
@@ -82,19 +86,21 @@ class ServiceRequest extends FormRequest
     {
         $this->merge([
             'active' => $this->has('active') ? true : false,
-            'features' => $this->getFeaturesArray(),
+            // 'features' => $this->getFeaturesArray(),
         ]);
-        // dd($this->all());
     }
 
-    /**
-     * Get the features as a simple array for storage
-     *
-     * @return array
-     */
-    public function getFeaturesArray(): array
-    {
-        $features = $this->input('features', []);
-        return array_column($features, 'text');
-    }
+    // /**
+    //  * Get the features as a simple array for storage
+    //  *
+    //  * @return array
+    //  */
+    // public function getFeaturesArray(): array
+    // {
+    //     $features_request = collect($this->input('features', []));
+    //     return[
+    //         'en' => $features_request->pluck('en')->toArray() ?? [],
+    //         'ar' => $features_request->pluck('ar')->toArray() ?? [],
+    //     ];
+    // }
 }
