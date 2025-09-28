@@ -13,9 +13,17 @@ class Video extends Model
 
     public $translatable = ['title', 'description'];
 
-    protected $fillable = ['title', 'description', 'path', 'active'];
+    protected $fillable = ['title', 'description', 'path', 'active', 'thumbnail'];
 
     protected $casts = [
         'active' => 'boolean',
     ];
+
+    public function getThumbnailPathAttribute()
+    {
+        if ($this->thumbnail) {
+            return asset('storage/' . $this->thumbnail);
+        }
+        return null;
+    }
 }

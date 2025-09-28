@@ -12,8 +12,11 @@ class SucessStoryResource extends JsonResource
         $fields = [
             'id' => $this->id,
             'owner_name' => $this->owner_name,
-            'rate' => $this->rate,
             'description' => $this->description,
+            'url' => $this->url,
+            'thumbnail' => $this->thumbnail_path,
+            'active' => $this->active,
+            'created_at' => $this->created_at->format('Y-m-d'),
             ];
 
         return $fields;

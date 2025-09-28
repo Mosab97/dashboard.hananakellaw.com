@@ -33,6 +33,7 @@ class VideoRequest extends FormRequest
             'path' => 'nullable|string|max:255',
             'active' => 'boolean',
             'order' => 'nullable|integer|min:0',
+            'thumbnail' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
         ];
 
         return $rules;
@@ -58,10 +59,13 @@ class VideoRequest extends FormRequest
             'description.ar.string' => t('Arabic description must be a string'),
             'description.*.max' => t('Description must not exceed 255 characters'),
 
-                'path.string' => t('Path must be a string'),
+            'path.string' => t('Path must be a string'),
             'path.max' => t('Path must not exceed 255 characters'),
 
             'active.boolean' => t('Active status must be true or false'),
+            'thumbnail.image' => t('Thumbnail must be an image file'),
+            'thumbnail.mimes' => t('Thumbnail must be a file of type: jpeg, png, jpg, gif, svg, webp'),
+            'thumbnail.max' => t('Thumbnail file size must not exceed 2MB'),
 
         ];
     }

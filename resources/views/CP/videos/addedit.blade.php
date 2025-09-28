@@ -31,11 +31,33 @@
                 </ul>
                 <!--end::Navs-->
             </div>
+            <div class="d-flex my-4 justify-content-end order-lg-2 order-1">
+
+                <a href="{{ route($config['full_route_name'] . '.index') }}" class="btn btn-sm btn-light me-2"
+                    id="kt_user_follow_button">
+                    <span class="svg-icon svg-icon-2">
+                        <!-- SVG content remains unchanged -->
+                    </span>
+                    {{ __('Exit') }}
+                </a>
+
+                <a href="#" class="btn btn-sm btn-primary" data-kt-{{ $config['singular_key'] }}-action="submit">
+                    <span class="indicator-label">
+                        <span class="svg-icon svg-icon-2">
+                            <!-- SVG content remains unchanged -->
+                        </span>
+                        {{ __('Save Form') }}
+                    </span>
+                    <span class="indicator-progress">
+                        {{ __('Please wait...') }} <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                    </span>
+                </a>
+            </div>
         </div>
     </div>
 
-    <form action="{{ route($config['full_route_name'] . '.addedit', ['Id' => $_model->id ?? null]) }}"
-        method="POST" id="kt_add_edit_form" enctype="multipart/form-data">
+    <form action="{{ route($config['full_route_name'] . '.addedit', ['Id' => $_model->id ?? null]) }}" method="POST"
+        id="{{ $config['singular_key'] }}_form" enctype="multipart/form-data">
         @csrf
         <input type="hidden" name="{{ $config['id_field'] }}" value="{{ $_model->id ?? '' }}">
 
@@ -45,15 +67,23 @@
             </div>
         </div>
 
-        <div class="d-flex justify-content-end mt-5">
-            <button type="submit" class="btn btn-primary" id="kt_add_edit_submit">
-                <span class="indicator-label">{{ t('Save') }}</span>
-                <span class="indicator-progress">{{ t('Please wait...') }}
-                    <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
-                </span>
-            </button>
-        </div>
+
     </form>
 
-    @include($config['view_path'] . 'scripts.addeditJS')
 @endsection
+
+@push('scripts')
+    <script>
+        // Initialize the form handler
+        document.addEventListener('DOMContentLoaded', () => {
+            // Initialize the form handler
+            const formHandler = RegularFormHandler.initialize(
+                '#{{ $config['singular_key'] }}_form',
+                '[data-kt-{{ $config['singular_key'] }}-action="submit"]'
+            );
+
+
+        });
+    </script>
+    @include($config['view_path'] . 'scripts.addeditJS')
+@endpush

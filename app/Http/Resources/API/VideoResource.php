@@ -14,7 +14,10 @@ class VideoResource extends JsonResource
             'title' => $this->title,
             'description' => $this->description,
             'path' => $this->path,
-            ];
+            'thumbnail' => $this->thumbnail_path,
+            'active' => $this->active,
+            'created_at' => $this->created_at->format('Y-m-d'),
+        ];
 
         return $fields;
     }

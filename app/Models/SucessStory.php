@@ -13,11 +13,17 @@ class SucessStory extends Model
 
     public $translatable = ['owner_name', 'description'];
 
-    protected $fillable = ['owner_name', 'rate', 'description', 'active'];
+    protected $fillable = ['owner_name', 'rate', 'description', 'active', 'url', 'thumbnail'];
 
     protected $casts = [
         'rate' => 'integer',
         'active' => 'boolean',
     ];
-
+    public function getThumbnailPathAttribute()
+    {
+        if ($this->thumbnail) {
+            return asset('storage/' . $this->thumbnail);
+        }
+        return null;
+    }
 }

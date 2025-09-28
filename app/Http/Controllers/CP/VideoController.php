@@ -9,6 +9,7 @@ use App\Services\Filters\VideoFilterService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 use Yajra\DataTables\Facades\DataTables;
 
 class VideoController extends Controller
@@ -113,9 +114,20 @@ class VideoController extends Controller
         try {
             $validatedData = $request->validated();
             $id = $request->input($this->config['id_field']);
+            $thumbnailFile = $request->hasFile('thumbnail') ? $request->file('thumbnail') : null;
+            if ($thumbnailFile) {
+                $imagePath = Storage::disk('public')->putFile('videos', $thumbnailFile);
+                $validatedData['thumbnail'] = $imagePath;
+            }
 
             if (! empty($id)) {
                 $result = Video::findOrFail($id);
+                if ($request->has('delete_thumbnail')) {
+                    if (isset($result->thumbnail)) {
+                        Storage::disk('public')->delete($result->thumbnail);
+                    }
+                    $validatedData['thumbnail'] = null;
+                }
                 $result->update($validatedData);
             } else {
                 $result = $this->_model->create($validatedData);

@@ -9,6 +9,7 @@ use App\Services\Filters\SucessStoryFilterService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 use Yajra\DataTables\Facades\DataTables;
 
 class SucessStoryController extends Controller
@@ -109,21 +110,25 @@ class SucessStoryController extends Controller
         try {
             $validatedData = $request->validated();
             $id = $request->input($this->config['id_field']);
+            $thumbnailFile = $request->hasFile('thumbnail') ? $request->file('thumbnail') : null;
+            if ($thumbnailFile) {
+                $imagePath = Storage::disk('public')->putFile('sucess_stories', $thumbnailFile);
+                $validatedData['thumbnail'] = $imagePath;
+            }
 
             if (! empty($id)) {
                 $result = SucessStory::findOrFail($id);
+                if ($request->has('delete_thumbnail')) {
+                    if (isset($result->thumbnail)) {
+                        Storage::disk('public')->delete($result->thumbnail);
+                    }
+                    $validatedData['thumbnail'] = null;
+                }
                 $result->update($validatedData);
             } else {
                 $result = $this->_model->create($validatedData);
             }
-            if ($request->ajax()) {
-                return response()->json([
-                    'status' => true,
-                    'message' => t($this->config['singular_name'].' Added Successfully!'),
-                    'id' => $result->id,
-                    'data' => $result,
-                ]);
-            }
+
 
             return redirect()
                 ->route($this->config['full_route_name'].'.edit', ['_model' => $result->id])
@@ -135,12 +140,7 @@ class SucessStoryController extends Controller
                 'request_data' => $request->except(['password', 'token']),
             ]);
 
-            if ($request->ajax()) {
-                return response()->json([
-                    'status' => false,
-                    'message' => $e->getMessage(),
-                ], 422);
-            }
+
 
             return redirect()->back()->withInput()->with('error', $e->getMessage());
         }
