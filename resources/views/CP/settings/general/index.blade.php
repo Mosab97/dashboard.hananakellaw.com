@@ -136,7 +136,7 @@
                                                 <label class="form-label">{{ t('Privacy Policy') }}
                                                     ({{ strtoupper($language) }})
                                                 </label>
-                                                <textarea class="form-control" rows="6" name="privacy_policy[{{ $language }}]">{{ Setting::get('privacy_policy', [])[$language] ?? '' }}</textarea>
+                                                <textarea class="form-control" rows="6" name="privacy_policy[{{ $language }}]">{!! Setting::get('privacy_policy', [])[$language] ?? '' !!}</textarea>
                                             </div>
                                         </div>
                                     @endforeach
@@ -149,7 +149,7 @@
                                                 <label class="form-label">{{ t('Terms & Conditions') }}
                                                     ({{ strtoupper($language) }})
                                                 </label>
-                                                <textarea class="form-control" rows="6" name="terms_conditions[{{ $language }}]">{{ Setting::get('terms_conditions', [])[$language] ?? '' }}</textarea>
+                                                <textarea class="form-control" rows="6" name="terms_conditions[{{ $language }}]">{!! Setting::get('terms_conditions', [])[$language] ?? '' !!}</textarea>
                                             </div>
                                         </div>
                                     @endforeach
@@ -162,7 +162,7 @@
                                                 <label class="form-label">{{ t('FAQ') }}
                                                     ({{ strtoupper($language) }})
                                                 </label>
-                                                <textarea class="form-control" rows="6" name="faq[{{ $language }}]">{{ Setting::get('faq', [])[$language] ?? '' }}</textarea>
+                                                <textarea class="form-control" rows="6" name="faq[{{ $language }}]">{!! Setting::get('faq', [])[$language] ?? '' !!}</textarea>
                                             </div>
                                         </div>
                                     @endforeach
@@ -176,7 +176,7 @@
                                                 <label class="form-label">{{ t('Disclaimer') }}
                                                     ({{ strtoupper($language) }})
                                                 </label>
-                                                <textarea class="form-control" rows="6" name="disclaimer[{{ $language }}]">{{ Setting::get('disclaimer', [])[$language] ?? '' }}</textarea>
+                                                <textarea class="form-control" rows="6" name="disclaimer[{{ $language }}]">{!! Setting::get('disclaimer', [])[$language] ?? '' !!}</textarea>
                                             </div>
                                         </div>
                                     @endforeach
@@ -211,3 +211,61 @@
     </div>
     <!--end::Content container-->
 @endsection
+
+
+
+@push('scripts')
+    <script src="https://cdn.ckeditor.com/ckeditor5/41.4.2/classic/ckeditor.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Find all textarea elements in the settings form
+            const form = document.getElementById('settings_form');
+            if (!form) return;
+
+            const textareas = form.querySelectorAll('textarea');
+            const editors = []; // Store editor instances for form submission
+
+            // Initialize CKEditor for each textarea
+            textareas.forEach((textarea, index) => {
+                ClassicEditor.create(textarea, {
+                        placeholder: 'Enter content...',
+                        toolbar: {
+                            items: [
+                                'heading', '|',
+                                'bold', 'italic', 'underline', 'link', '|',
+                                'bulletedList', 'numberedList', 'outdent', 'indent', '|',
+                                'blockQuote', 'insertTable', 'undo', 'redo'
+                            ]
+                        },
+                        table: {
+                            contentToolbar: ['tableColumn', 'tableRow', 'mergeTableCells']
+                        }
+                        // language: 'ar' // uncomment if you want full UI in Arabic
+                    })
+                    .then(editor => {
+                        // Store editor instance
+                        editors.push({
+                            editor: editor,
+                            textarea: textarea
+                        });
+
+                        console.log(`CKEditor initialized for textarea: ${textarea.name || 'unnamed'}`);
+                    })
+                    .catch(error => {
+                        console.error(`Failed to initialize CKEditor for textarea ${textarea.name || 'unnamed'}:`, error);
+                    });
+            });
+
+            // Handle form submission - sync all editor data
+            form.addEventListener('submit', function(e) {
+                editors.forEach(({editor, textarea}) => {
+                    try {
+                        textarea.value = editor.getData();
+                    } catch (error) {
+                        console.error(`Failed to sync data for textarea ${textarea.name}:`, error);
+                    }
+                });
+            });
+        });
+    </script>
+@endpush
