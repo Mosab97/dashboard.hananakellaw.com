@@ -1398,4 +1398,10 @@ return [
   'Delete Thumbnail' => 'Delete Thumbnail',
   'Delete thumbnail will delete the thumbnail from the database' => 'Delete thumbnail will delete the thumbnail from the database',
   'Delete thumbnail must be true or false' => 'Delete thumbnail must be true or false',
+  'Site WhatsApp' => 'Site WhatsApp',
+  'Years of Experience' => 'Years of Experience',
+  'FAQ' => 'FAQ',
+  'Disclaimer' => 'Disclaimer',
+  'Date is required' => 'Date is required',
+  'Date is not a valid date' => 'Date is not a valid date',
 ];

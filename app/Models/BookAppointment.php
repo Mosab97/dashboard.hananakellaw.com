@@ -11,7 +11,10 @@ class BookAppointment extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $fillable = ['appointment_type_id', 'name', 'phone', 'city'];
+    protected $fillable = ['appointment_type_id', 'name', 'phone', 'city', 'date'];
+    protected $casts = [
+        'date' => 'date',
+    ];
 
     public function appointmentType()
     {

@@ -15,6 +15,7 @@ class BookAppointmentResource extends JsonResource
             'phone' => $this->phone,
             'city' => $this->city,
             'appointment_type' => $this->whenLoaded('appointmentType', new AppointmentTypeResource($this->appointmentType)),
+            'date' => $this->date?->format('Y-m-d') ?? null,
         ];
 
         return $fields;

@@ -33,6 +33,26 @@ class HomeController extends Controller
     {
 
         return apiSuccess([
+            'settings' => [
+                'years_of_experience' => setting('years_of_experience'),
+                'address' => setting('site_address')[app()->getLocale()] ?? '',
+                'contact' => [
+                    'mobile' => setting('site_phone'),
+                    'email' => setting('site_email'),
+                    'whatsapp' => setting('site_whatsapp'),
+                ],
+                'social_media' => [
+                    'facebook' => setting('social_facebook'),
+                    'instagram' => setting('social_instagram'),
+                    'twitter' => setting('social_twitter'),
+                ],
+                'legal_documents' => [
+                    'privacy_policy' => setting('privacy_policy')[app()->getLocale()] ?? '',
+                    'terms_conditions' => setting('terms_conditions')[app()->getLocale()] ?? '',
+                    'faq' => setting('faq')[app()->getLocale()] ?? '',
+                    'disclaimer' => setting('disclaimer')[app()->getLocale()] ?? '',
+                ],
+            ],
             'sliders' => SliderResource::collection(Slider::where('active', true)->get()),
             'services' => ServiceResource::collection(Service::where('active', true)->get()),
             'videos' => VideoResource::collection(Video::where('active', true)->get()),
@@ -41,13 +61,14 @@ class HomeController extends Controller
             'about_office' => [
                 'title' => setting('about_office.title.' . app()->getLocale()),
                 'description' => setting('about_office.description.' . app()->getLocale()),
-                'features' => setting('about_office.features'  ),
+                'features' => collect(setting('about_office.features'))->pluck(app()->getLocale())->toArray(),
+
                 'image' => asset('storage/' . setting('about_office.image')),
-                ],
-                'why_choose_us' => WhyChooseUsResource::collection(WhyChooseUs::where('active', true)->get()),
-                'customer_rates' => CustomerRateResource::collection(CustomerRate::where('active', true)->get()),
-                'how_we_works' => HowWeWorkResource::collection(HowWeWork::where('active', true)->get()),
-                'articles' => ArticleResource::collection(Article::with(['article_type'])->where('active', true)->get()),
+            ],
+            'why_choose_us' => WhyChooseUsResource::collection(WhyChooseUs::where('active', true)->get()),
+            'customer_rates' => CustomerRateResource::collection(CustomerRate::where('active', true)->get()),
+            'how_we_works' => HowWeWorkResource::collection(HowWeWork::where('active', true)->get()),
+            'articles' => ArticleResource::collection(Article::with(['article_type'])->where('active', true)->get()),
         ]);
     }
 

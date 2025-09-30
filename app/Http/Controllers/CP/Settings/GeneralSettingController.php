@@ -8,7 +8,6 @@ use App\Services\Filters\SettingsFilterService;
 use App\Traits\HijriDateTrait;
 use Exception;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
@@ -74,8 +73,16 @@ class GeneralSettingController extends Controller
                 Setting::set('site_phone', $request->input('site_phone'));
             }
 
+            if ($request->has('site_whatsapp')) {
+                Setting::set('site_whatsapp', $request->input('site_whatsapp'));
+            }
+
             if ($request->has('site_address')) {
                 Setting::set('site_address', $request->input('site_address'));
+            }
+
+            if ($request->has('years_of_experience')) {
+                Setting::set('years_of_experience', $request->input('years_of_experience'));
             }
 
             // Social media settings
@@ -93,66 +100,20 @@ class GeneralSettingController extends Controller
 
             // Privacy and terms settings
             if ($request->has('privacy_policy')) {
-                Setting::set('privacy_policy', [
-                    'en' => $request->input('privacy_policy.en', ''),
-                    'ar' => $request->input('privacy_policy.ar', ''),
-                ]);
+                Setting::set('privacy_policy', $request->input('privacy_policy'));
             }
 
             if ($request->has('terms_conditions')) {
-                Setting::set('terms_conditions', [
-                    'en' => $request->input('terms_conditions.en', ''),
-                    'ar' => $request->input('terms_conditions.ar', ''),
-                ]);
+                Setting::set('terms_conditions', $request->input('terms_conditions'));
             }
 
-            // Mobile app settings
-            if ($request->has('mobile_app_version')) {
-                Setting::set('mobile_app_version', $request->input('mobile_app_version'));
+            if ($request->has('faq')) {
+                Setting::set('faq', $request->input('faq'));
             }
 
-            if ($request->has('mobile_app_link_android')) {
-                Setting::set('mobile_app_link_android', $request->input('mobile_app_link_android'));
+            if ($request->has('disclaimer')) {
+                Setting::set('disclaimer', $request->input('disclaimer'));
             }
-
-            if ($request->has('mobile_app_link_ios')) {
-                Setting::set('mobile_app_link_ios', $request->input('mobile_app_link_ios'));
-            }
-
-            // WhatsApp settings
-            if ($request->has('whatsapp_message_limit_system')) {
-                Setting::set('whatsapp_message_limit_system', (int) $request->input('whatsapp_message_limit_system'));
-            }
-
-            if ($request->has('whatsapp_message_price')) {
-                Setting::set('whatsapp_message_price', (float) $request->input('whatsapp_message_price'));
-            }
-
-            if ($request->has('whatsapp_reset_period')) {
-                Setting::set('whatsapp_reset_period', $request->input('whatsapp_reset_period'));
-            }
-
-            if ($request->has('whatsapp_reset_period')) {
-                Setting::set('whatsapp_reset_period', $request->input('whatsapp_reset_period'));
-            }
-
-            if ($request->has('subscription_price')) {
-                Setting::set('subscription_price', (float) $request->input('subscription_price'));
-            }
-
-            if ($request->has('subscription_discount')) {
-                Setting::set('subscription_discount', $request->input('subscription_discount'));
-            }
-
-            if ($request->has('subscription_total_price')) {
-                Setting::set('subscription_total_price', (float) $request->input('subscription_total_price'));
-            }
-
-            if ($request->has('subscription_end_date')) {
-                Setting::set('subscription_end_date', $request->input('subscription_end_date'));
-            }
-
-            Cache::forget('subscription_settings');
 
             // Save all settings
             Setting::save();
@@ -200,47 +161,6 @@ class GeneralSettingController extends Controller
             'config' => $this->config,
         ];
 
-        // Load all settings
-        $data['settings'] = [
-            // Site information
-            'site_name' => Setting::get('site_name', config('app.name')),
-            'site_description' => Setting::get('site_description', ''),
-            'site_email' => Setting::get('site_email', ''),
-            'site_phone' => Setting::get('site_phone', ''),
-            'site_address' => Setting::get('site_address', [
-                'en' => '',
-                'ar' => '',
-            ]),
-            // Social media
-            'social_facebook' => Setting::get('social_facebook', ''),
-            'social_instagram' => Setting::get('social_instagram', ''),
-            'social_twitter' => Setting::get('social_twitter', ''),
-
-            // Privacy and terms
-            'privacy_policy' => Setting::get('privacy_policy', [
-                'en' => '',
-                'ar' => '',
-            ]),
-            'terms_conditions' => Setting::get('terms_conditions', [
-                'en' => '',
-                'ar' => '',
-            ]),
-
-            // Mobile app
-            'mobile_app_version' => Setting::get('mobile_app_version', '1.0.0'),
-            'mobile_app_link_android' => Setting::get('mobile_app_link_android', ''),
-            'mobile_app_link_ios' => Setting::get('mobile_app_link_ios', ''),
-
-            // WhatsApp
-            'whatsapp_message_limit_system' => Setting::get('whatsapp_message_limit_system', 1000),
-            'whatsapp_message_price' => Setting::get('whatsapp_message_price', 0.10),
-            'whatsapp_reset_period' => Setting::get('whatsapp_reset_period', 'monthly'),
-            'subscription_price' => Setting::get('subscription_price', 0),
-            'subscription_discount' => Setting::get('subscription_discount', 0),
-            'subscription_total_price' => Setting::get('subscription_total_price', 0),
-            'subscription_end_date' => Setting::get('subscription_end_date', ''),
-
-        ];
 
         return $data;
     }

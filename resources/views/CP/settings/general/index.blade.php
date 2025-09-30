@@ -35,9 +35,9 @@
                                 <a class="nav-link" data-bs-toggle="tab"
                                     href="#tab_social_media">{{ t('Social Media') }}</a>
                             </li>
-                            {{-- <li class="nav-item">
+                            <li class="nav-item">
                                 <a class="nav-link" data-bs-toggle="tab" href="#tab_legal">{{ t('Legal Documents') }}</a>
-                            </li> --}}
+                            </li>
 
 
                         </ul>
@@ -53,15 +53,28 @@
                                         <div class="mb-5">
                                             <label class="form-label">{{ t('Site Phone') }}</label>
                                             <input type="text" class="form-control" name="site_phone"
-                                                value="{{ $settings['site_phone'] }}">
+                                                value="{{ Setting::get('site_phone', '') }}">
                                         </div>
-
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="mb-5">
+                                            <label class="form-label">{{ t('Site WhatsApp') }}</label>
+                                            <input type="text" class="form-control" name="site_whatsapp"
+                                                value="{{ Setting::get('site_whatsapp', '') }}">
+                                        </div>
                                     </div>
                                     <div class="col-6">
                                         <div class="mb-5">
                                             <label class="form-label">{{ t('Site Email') }}</label>
                                             <input type="text" class="form-control" name="site_email"
-                                                value="{{ $settings['site_email'] }}">
+                                                value="{{ Setting::get('site_email', '') }}">
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="mb-5">
+                                            <label class="form-label">{{ t('Years of Experience') }}</label>
+                                            <input type="text" class="form-control" name="years_of_experience"
+                                                value="{{ Setting::get('years_of_experience', '') }}">
                                         </div>
                                     </div>
 
@@ -73,7 +86,7 @@
                                                 </label>
                                                 <input type="text" class="form-control"
                                                     name="site_address[{{ $language }}]"
-                                                    value="{{ $settings['site_address'][$language] ?? '' }}">
+                                                    value="{{ Setting::get('site_address', [])[$language] ?? '' }}">
                                             </div>
                                         </div>
                                     @endforeach
@@ -88,14 +101,14 @@
                                         <div class="mb-5">
                                             <label class="form-label">{{ t('Facebook URL') }}</label>
                                             <input type="url" class="form-control" name="social_facebook"
-                                                value="{{ $settings['social_facebook'] }}">
+                                                value="{{ Setting::get('social_facebook', '') }}">
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="mb-5">
                                             <label class="form-label">{{ t('Instagram URL') }}</label>
                                             <input type="url" class="form-control" name="social_instagram"
-                                                value="{{ $settings['social_instagram'] }}">
+                                                value="{{ Setting::get('social_instagram', '') }}">
                                         </div>
                                     </div>
                                 </div>
@@ -105,51 +118,75 @@
                                         <div class="mb-5">
                                             <label class="form-label">{{ t('Twitter URL') }}</label>
                                             <input type="url" class="form-control" name="social_twitter"
-                                                value="{{ $settings['social_twitter'] }}">
+                                                value="{{ Setting::get('social_twitter', '') }}">
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <!--end::Social Media Tab-->
-{{--
+
                             <!--begin::Legal Documents Tab-->
                             <div class="tab-pane fade" id="tab_legal" role="tabpanel">
 
-                                <!-- Privacy Policy -->
-                                <div class="mb-10">
-                                    <h4 class="mb-3">{{ t('Privacy Policy') }}</h4>
-
-                                    <!-- English -->
-                                    <div class="mb-5">
-                                        <label class="form-label">{{ t('English') }}</label>
-                                        <textarea class="form-control" id="privacy_policy_en" name="privacy_policy[en]" rows="6">{{ $settings['privacy_policy']['en'] }}</textarea>
-                                    </div>
-
-                                    <!-- Arabic -->
-                                    <div class="mb-5">
-                                        <label class="form-label">{{ t('Arabic') }}</label>
-                                        <textarea class="form-control" id="privacy_policy_ar" name="privacy_policy[ar]" rows="6" dir="rtl">{{ $settings['privacy_policy']['ar'] }}</textarea>
-                                    </div>
+                                <div class="row">
+                                    <!-- Privacy Policy -->
+                                    @foreach (config('app.locales') as $language)
+                                        <div class="col-6">
+                                            <div class="mb-5">
+                                                <label class="form-label">{{ t('Privacy Policy') }}
+                                                    ({{ strtoupper($language) }})
+                                                </label>
+                                                <textarea class="form-control" rows="6" name="privacy_policy[{{ $language }}]">{{ Setting::get('privacy_policy', [])[$language] ?? '' }}</textarea>
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                </div>
+                                <div class="row">
+                                    <!-- Terms & Conditions -->
+                                    @foreach (config('app.locales') as $language)
+                                        <div class="col-6">
+                                            <div class="mb-5">
+                                                <label class="form-label">{{ t('Terms & Conditions') }}
+                                                    ({{ strtoupper($language) }})
+                                                </label>
+                                                <textarea class="form-control" rows="6" name="terms_conditions[{{ $language }}]">{{ Setting::get('terms_conditions', [])[$language] ?? '' }}</textarea>
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                </div>
+                                <div class="row">
+                                    <!-- FAQ -->
+                                    @foreach (config('app.locales') as $language)
+                                        <div class="col-6">
+                                            <div class="mb-5">
+                                                <label class="form-label">{{ t('FAQ') }}
+                                                    ({{ strtoupper($language) }})
+                                                </label>
+                                                <textarea class="form-control" rows="6" name="faq[{{ $language }}]">{{ Setting::get('faq', [])[$language] ?? '' }}</textarea>
+                                            </div>
+                                        </div>
+                                    @endforeach
                                 </div>
 
-                                <!-- Terms & Conditions -->
-                                <div class="mb-10">
-                                    <h4 class="mb-3">{{ t('Terms & Conditions') }}</h4>
-
-                                    <!-- English -->
-                                    <div class="mb-5">
-                                        <label class="form-label">{{ t('English') }}</label>
-                                        <textarea class="form-control" id="terms_conditions_en" name="terms_conditions[en]" rows="6">{{ $settings['terms_conditions']['en'] }}</textarea>
-                                    </div>
-
-                                    <!-- Arabic -->
-                                    <div class="mb-5">
-                                        <label class="form-label">{{ t('Arabic') }}</label>
-                                        <textarea class="form-control" id="terms_conditions_ar" name="terms_conditions[ar]" rows="6" dir="rtl">{{ $settings['terms_conditions']['ar'] }}</textarea>
-                                    </div>
+                                <div class="row">
+                                    <!-- Disclaimer -->
+                                    @foreach (config('app.locales') as $language)
+                                        <div class="col-6">
+                                            <div class="mb-5">
+                                                <label class="form-label">{{ t('Disclaimer') }}
+                                                    ({{ strtoupper($language) }})
+                                                </label>
+                                                <textarea class="form-control" rows="6" name="disclaimer[{{ $language }}]">{{ Setting::get('disclaimer', [])[$language] ?? '' }}</textarea>
+                                            </div>
+                                        </div>
+                                    @endforeach
                                 </div>
+
+
+
+
                             </div>
-                            <!--end::Legal Documents Tab--> --}}
+                            <!--end::Legal Documents Tab-->
 
 
 

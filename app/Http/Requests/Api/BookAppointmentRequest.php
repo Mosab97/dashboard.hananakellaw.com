@@ -28,6 +28,7 @@ class BookAppointmentRequest extends FormRequest
             'phone' => ['required', 'string', 'max:255'],
             'city' => ['required', 'string', 'max:255'],
             'appointment_type_id' => ['required', 'exists:appointment_types,id'],
+            'date' => ['required', 'date'],
         ];
 
         return $rules;
@@ -46,6 +47,8 @@ class BookAppointmentRequest extends FormRequest
             'city.required' => t('City is required'),
             'appointment_type_id.required' => t('Appointment type is required'),
             'appointment_type_id.exists' => t('Appointment type does not exist'),
+            'date.required' => t('Date is required'),
+            'date.date' => t('Date is not a valid date'),
         ];
     }
 }
