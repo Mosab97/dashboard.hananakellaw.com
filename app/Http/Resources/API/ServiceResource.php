@@ -24,7 +24,7 @@ class ServiceResource extends JsonResource
             'features' => collect($this->features)->pluck(app()->getLocale())->toArray(),
             'link' => $this->link,
             'active' => $this->active,
-            'created_at' => $this->created_at->format('Y-m-d'),
+            'created_at' => $this->created_at?->format('Y-m-d') ?? null,
         ];
     }
 }

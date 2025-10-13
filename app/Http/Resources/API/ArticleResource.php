@@ -14,7 +14,7 @@ class ArticleResource extends JsonResource
             'title' => $this->title,
             'description' => $this->description,
             'active' => $this->active,
-            'published_at' => $this->published_at->format('Y-m-d'),
+            'published_at' => $this->published_at?->format('Y-m-d')??null,
             'article_type' => $this->whenLoaded('article_type', function () {
                 return [
                     'id' => $this->article_type->id,

@@ -16,7 +16,7 @@ class VideoResource extends JsonResource
             'path' => $this->path,
             'thumbnail' => $this->thumbnail_path,
             'active' => $this->active,
-            'created_at' => $this->created_at->format('Y-m-d'),
+            'created_at' => $this->created_at?->format('Y-m-d') ?? null,
         ];
 
         return $fields;
