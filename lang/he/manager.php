@@ -1406,4 +1406,5 @@ return [
   'Date is not a valid date' => 'Date is not a valid date',
   'Thumbnail' => 'Thumbnail',
   'Show Video' => 'Show Video',
+  'Description must not exceed 500 characters' => 'Description must not exceed 500 characters',
 ];

@@ -1399,8 +1399,9 @@ return [
   'Years of Experience' => 'سنوات الخبرة',
   'FAQ' => 'الأسئلة الشائعة',
   'Disclaimer' => 'اخلاء المسؤولية',
-  'Date is required' => 'Date is required',
-  'Date is not a valid date' => 'Date is not a valid date',
-  'Thumbnail' => 'Thumbnail',
-  'Show Video' => 'Show Video',
+  'Date is required' => ' التاريخ مطلوب',
+  'Date is not a valid date' => ' التاريخ غير صالح',
+  'Thumbnail' => 'صورة الصورة',
+  'Show Video' => ' عرض الفيديو',
+  'Description must not exceed 500 characters' => 'الوصف لا يجب أن يتجاوز 500 حرف',
 ];
