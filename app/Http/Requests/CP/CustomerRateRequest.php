@@ -28,8 +28,8 @@ class CustomerRateRequest extends FormRequest
             'name.he' => ['nullable', 'string', 'max:255'],
             'name.ar' => ['required', 'string', 'max:255'],
             'description' => ['required', 'array'],
-            'description.he' => ['nullable', 'string', 'max:255'],
-            'description.ar' => ['required', 'string', 'max:255'],
+            'description.he' => ['nullable', 'string'], //, 'max:255'
+            'description.ar' => ['required', 'string'], //, 'max:255'
             'rate' => ['required', 'integer', 'min:1', 'max:5'],
             'active' => ['boolean'],
             'order' => ['nullable', 'integer', 'min:0'],
