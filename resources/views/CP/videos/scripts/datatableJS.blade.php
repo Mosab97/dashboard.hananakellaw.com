@@ -19,17 +19,8 @@
             }
         },
         {
-            data: 'path',
-            name: 'path',
-            orderable: false,
-            searchable: true,
-            render: function(data, type, row) {
-                return data || 'N/A';
-            }
-        },
-        {
-            data: 'description',
-            name: 'description',
+            data: 'thumbnail',
+            name: 'thumbnail',
             orderable: false,
             searchable: true,
             render: function(data, type, row) {
@@ -41,7 +32,9 @@
             name: 'active',
             orderable: true,
             searchable: true,
-
+            render: function(data, type, row) {
+                return data || 'N/A';
+            }
         },
         {
             data: 'created_at',

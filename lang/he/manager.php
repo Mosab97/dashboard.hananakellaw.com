@@ -1404,4 +1404,6 @@ return [
   'Disclaimer' => 'Disclaimer',
   'Date is required' => 'Date is required',
   'Date is not a valid date' => 'Date is not a valid date',
+  'Thumbnail' => 'Thumbnail',
+  'Show Video' => 'Show Video',
 ];

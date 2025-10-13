@@ -98,8 +98,8 @@
                             <tr class="text-start text-muted fw-bold fs-7 text-uppercase gs-0">
                                 <th class="min-w-125px">{{ t('ID') }}</th>
                                 <th class="min-w-100px">{{ t('Title') }}</th>
-                                <th class="min-w-100px">{{ t('Description') }}</th>
-                                <th class="min-w-100px">{{ t('Path') }}</th>
+                                <th class="min-w-100px">{{ t('Thumbnail') }}</th>
+                                {{-- <th class="min-w-100px">{{ t('Show Video') }}</th> --}}
                                 <th class="min-w-100px">{{ t('Active') }}</th>
                                 <th class="min-w-125px">{{ t('Created At') }}</th>
                                 <th class="text-end min-w-100px">{{ t('Actions') }}</th>

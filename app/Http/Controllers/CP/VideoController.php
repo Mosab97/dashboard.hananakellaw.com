@@ -56,15 +56,15 @@ class VideoController extends Controller
                         ];
                     }
                 })
+                ->editColumn('thumbnail', function ($item) {
+                    return '<img src="'.$item->thumbnail_path.'" alt="Thumbnail" class="img-fluid" style="width: 100px; height: 100px;">';
+                })
                 ->editColumn('title', function ($item) {
-                    return '<a href="'.route($this->config['full_route_name'].'.edit', ['_model' => $item->id]).'" class="fw-bold text-gray-800 text-hover-primary">'
+                    return '<a target="_blank" href="'.$item->path.'" class="fw-bold text-gray-800 text-hover-primary">'
                         .($item->title ?? 'N/A').'</a>';
                 })
-                ->editColumn('path', function ($item) {
-                    return $item->path ?? 'N/A';
-                })
-                ->editColumn('description', function ($item) {
-                    return $item->description ?? 'N/A';
+                ->editColumn('show_video', function ($item) {
+                    return '<a type="button" class="btn btn-primary" target="_blank" href="'.$item->path.'" target="_blank">'.($item->path ?? 'N/A').'</a>';
                 })
                 ->editColumn('active', function ($item) {
                     return '<span class="badge badge-light-'.($item->active ? 'success' : 'danger').'">'
@@ -84,7 +84,7 @@ class VideoController extends Controller
                         throw $e;
                     }
                 })
-                ->rawColumns(['title', 'path', 'description', 'active', 'action'])
+                ->rawColumns(['title', 'show_video', 'thumbnail', 'active', 'action'])
                 ->make(true);
         }
     }
