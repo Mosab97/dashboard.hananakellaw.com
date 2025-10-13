@@ -22,7 +22,7 @@
 
                 <!--begin::Card body-->
                 <div class="card-body py-4">
-                    <form id="settings_form" method="POST" action="{{ route($config['full_route_name'] . '.update') }}">
+                    <form id="settings_form" method="POST" action="{{ route($config['full_route_name'] . '.update') }}" enctype="multipart/form-data">
                         @csrf
 
                         <!--begin::Tabs-->
@@ -77,7 +77,22 @@
                                                 value="{{ Setting::get('years_of_experience', '') }}">
                                         </div>
                                     </div>
-
+                                    <div class="col-6">
+                                        <div class="mb-5">
+                                            <label class="form-label">{{ t('Logo') }}</label>
+                                            <input type="file" class="form-control" name="logo" accept="image/*">
+                                            @php
+                                                $logo = asset('storage/' . Setting::get('logo', ''));
+                                            @endphp
+                                            @if ($logo)
+                                                <a href="{{ $logo }}" target="_blank">
+                                                    <img src="{{ $logo }}" alt="{{ t('Logo') }}"
+                                                        class="img-fluid" style="width: 100px; height: 100px;">
+                                                    <p class="text-muted mt-1">{{ t('Current logo') }}</p>
+                                                </a>
+                                            @endif
+                                        </div>
+                                    </div>
                                     @foreach (config('app.locales') as $language)
                                         <div class="col-6">
                                             <div class="mb-5">
@@ -252,13 +267,18 @@
                         console.log(`CKEditor initialized for textarea: ${textarea.name || 'unnamed'}`);
                     })
                     .catch(error => {
-                        console.error(`Failed to initialize CKEditor for textarea ${textarea.name || 'unnamed'}:`, error);
+                        console.error(
+                            `Failed to initialize CKEditor for textarea ${textarea.name || 'unnamed'}:`,
+                            error);
                     });
             });
 
             // Handle form submission - sync all editor data
             form.addEventListener('submit', function(e) {
-                editors.forEach(({editor, textarea}) => {
+                editors.forEach(({
+                    editor,
+                    textarea
+                }) => {
                     try {
                         textarea.value = editor.getData();
                     } catch (error) {

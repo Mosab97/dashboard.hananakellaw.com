@@ -10,6 +10,7 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 
 class GeneralSettingController extends Controller
 {
@@ -113,6 +114,11 @@ class GeneralSettingController extends Controller
 
             if ($request->has('disclaimer')) {
                 Setting::set('disclaimer', $request->input('disclaimer'));
+            }
+// dd($request->logo);
+            if ($request->has('logo') && $request->file('logo')) {
+                $logoPath = Storage::disk('public')->putFile('logo', $request->file('logo'));
+                Setting::set('logo', $logoPath);
             }
 
             // Save all settings

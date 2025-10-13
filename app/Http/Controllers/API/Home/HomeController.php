@@ -31,9 +31,11 @@ class HomeController extends Controller
 {
     public function home(Request $request)
     {
+        $logo =  setting('logo');
 
         return apiSuccess([
             'settings' => [
+                'logo' => $logo ? asset('storage/' . $logo) : null,
                 'years_of_experience' => setting('years_of_experience'),
                 'address' => setting('site_address')[app()->getLocale()] ?? '',
                 'contact' => [

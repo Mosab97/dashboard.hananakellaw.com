@@ -28,11 +28,11 @@ class ServiceRequest extends FormRequest
             'title.he' => 'nullable|string|max:255',
             'title.ar' => 'required|string|max:255',
             'description' => 'nullable|array',
-            'description.he' => 'nullable|string|max:255',
-            'description.ar' => 'nullable|string|max:255',
+            'description.he' => 'nullable|string',//|max:20000
+            'description.ar' => 'nullable|string',//|max:20000
             'short_description' => 'nullable|array',
-            'short_description.he' => 'nullable|string|max:255',
-            'short_description.ar' => 'nullable|string|max:255',
+            'short_description.he' => 'nullable|string',//|max:20000
+            'short_description.ar' => 'nullable|string',//|max:20000
             'icon' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
             'active' => 'boolean',
             'features' => ['required', 'array'],

@@ -157,21 +157,21 @@
                                 $features_old = is_array($_model->features) ? $_model->features : [$_model->features];
                                 $features = old('features', $features_old);
                             @endphp
-                           @foreach ($features as $feature)
-                           <div data-repeater-item class="mb-2">
-                               <div class="row">
-                                   <div class="col-10">
-                                       <textarea name="text" class="form-control" placeholder="{{ t('Enter feature') }}" rows="3">{{ is_array($feature) ? $feature['text'] : $feature }}</textarea>
-                                   </div>
-                                   <div class="col-2 d-flex align-items-center">
-                                       <button type="button" data-repeater-delete
-                                           class="btn btn-outline-danger btn-sm">
-                                           <i class="fa fa-trash"></i>
-                                       </button>
-                                   </div>
-                               </div>
-                           </div>
-                       @endforeach
+                            @foreach ($features ?? [] as $feature)
+                                <div data-repeater-item class="mb-2">
+                                    <div class="row">
+                                        <div class="col-10">
+                                            <textarea name="text" class="form-control" placeholder="{{ t('Enter feature') }}" rows="3">{{ is_array($feature) ? $feature['text'] ?? null : $feature }}</textarea>
+                                        </div>
+                                        <div class="col-2 d-flex align-items-center">
+                                            <button type="button" data-repeater-delete
+                                                class="btn btn-outline-danger btn-sm">
+                                                <i class="fa fa-trash"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
 
                         </div>
                         <button type="button" data-repeater-create class="btn btn-primary btn-sm">
