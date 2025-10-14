@@ -21,7 +21,9 @@ class ServiceResource extends JsonResource
             'description' => $this->description,
             'short_description' => $this->short_description,
             'icon' => $this->icon_path,
-            'features' => collect($this->features)->pluck(app()->getLocale())->toArray(),
+            'features' => collect($this->features)->pluck(app()->getLocale())->filter(function($item) {
+                return $item !== null;
+            })->toArray(),
             'link' => $this->link,
             'active' => $this->active,
             'created_at' => $this->created_at?->format('Y-m-d') ?? null,
