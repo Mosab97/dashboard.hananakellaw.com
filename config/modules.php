@@ -84,6 +84,27 @@ return [
             'delete' => 'delete_sliders',
         ],
     ],
+    'book-appointment' => [
+        'table' => 'book_appointments',
+        'route' => 'book-appointment',
+        'full_route_name' => 'book-appointment',
+        'singular_name' => 'Book Appointment',
+        'plural_name' => 'Book Appointments',
+        'singular_key' => 'book_appointment',
+        'plural_key' => 'book_appointments',
+        'view_path' => 'CP.book_appointments.',
+        'id_field' => 'id',
+        'controller' => \App\Http\Controllers\CP\BookAppointmentController::class,
+        'upload_path' => 'book_appointments',
+        'permissions' => [
+            'view' => 'view_book_appointments',
+            'create' => 'create_book_appointments',
+            'edit' => 'edit_book_appointments',
+            'delete' => 'delete_book_appointments',
+        ],
+    ],
+
+
     'why_choose_us' => [
         'table' => 'why_choose_us',
         'route' => 'why_choose_us',

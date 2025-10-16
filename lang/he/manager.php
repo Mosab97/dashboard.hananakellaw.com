@@ -1407,4 +1407,13 @@ return [
   'Thumbnail' => 'Thumbnail',
   'Show Video' => 'Show Video',
   'Description must not exceed 500 characters' => 'Description must not exceed 500 characters',
+  'Book Appointments' => 'Book Appointments',
+  'Search Book Appointment' => 'Search Book Appointment',
+  'Add Book Appointment' => 'Add Book Appointment',
+  'City' => 'City',
+  'Date' => 'Date',
+  'Appointment Type' => 'Appointment Type',
+  'Edit Book Appointment' => 'Edit Book Appointment',
+  'Remove Book Appointment' => 'Remove Book Appointment',
+  'Book Appointment Deleted Successfully!' => 'Book Appointment Deleted Successfully!',
 ];

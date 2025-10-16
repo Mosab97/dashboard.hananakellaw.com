@@ -1404,4 +1404,13 @@ return [
   'Thumbnail' => 'صورة الصورة',
   'Show Video' => ' عرض الفيديو',
   'Description must not exceed 500 characters' => 'الوصف لا يجب أن يتجاوز 500 حرف',
+  'Book Appointments' => 'مواعيد الحجز',
+  'Search Book Appointment' => 'بحث في مواعيد الحجز',
+  'Add Book Appointment' => 'إضافة مواعيد الحجز',
+  'City' => 'المدينة',
+  'Date' => 'التاريخ',
+  'Appointment Type' => 'نوع الموعد',
+  'Edit Book Appointment' => 'تعديل مواعيد الحجز',
+  'Remove Book Appointment' => 'حذف مواعيد الحجز',
+  'Book Appointment Deleted Successfully!' => 'Book Appointment Deleted Successfully!',
 ];
