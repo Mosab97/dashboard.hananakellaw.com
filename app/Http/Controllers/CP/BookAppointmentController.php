@@ -50,7 +50,8 @@ class BookAppointmentController extends Controller
 
             return DataTables::eloquent($items)
                 ->editColumn('name', function ($item) {
-                    return '<a href="' . route($this->config['full_route_name'] . '.edit', ['_model' => $item->id]) . '" class="fw-bold text-gray-800 text-hover-primary">'
+                    $route = '#';
+                    return '<a href="' . $route . '" class="fw-bold text-gray-800 text-hover-primary">'
                         . ($item->name ?? 'N/A') . '</a>';
                 })
                 ->editColumn('phone', function ($item) {
