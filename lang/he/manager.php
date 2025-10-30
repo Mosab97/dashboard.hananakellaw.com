@@ -1416,4 +1416,6 @@ return [
   'Edit Book Appointment' => 'Edit Book Appointment',
   'Remove Book Appointment' => 'Remove Book Appointment',
   'Book Appointment Deleted Successfully!' => 'Book Appointment Deleted Successfully!',
+  'Hananakellaw Dashboard CRM' => 'Hananakellaw Dashboard CRM',
+  'Hananakellaw Dashboard' => 'Hananakellaw Dashboard',
 ];

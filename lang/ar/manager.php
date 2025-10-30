@@ -1413,4 +1413,6 @@ return [
   'Edit Book Appointment' => 'تعديل مواعيد الحجز',
   'Remove Book Appointment' => 'حذف مواعيد الحجز',
   'Book Appointment Deleted Successfully!' => 'Book Appointment Deleted Successfully!',
+  'Hananakellaw Dashboard CRM' => 'Hananakellaw Dashboard CRM',
+  'Hananakellaw Dashboard' => 'Hananakellaw Dashboard',
 ];

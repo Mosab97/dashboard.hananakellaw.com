@@ -1,6 +1,32 @@
 version: '3.8'
 
 services:
+  # Isolated MySQL Database for Hanan
+  db:
+    image: mysql:8.0
+    container_name: hananakellaw_db
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: hananakellaw_db
+      MYSQL_PASSWORD: root
+    volumes:
+      - hananakellaw_dbdata:/var/lib/mysql
+    ports:
+      - "3307:3306"
+    networks:
+      - hananakellaw-network
+
+  # Isolated Redis for Hanan
+  redis:
+    image: redis:alpine
+    container_name: hananakellaw_redis
+    restart: unless-stopped
+    ports:
+      - "6380:6379"
+    networks:
+      - hananakellaw-network
+
   app:
     build:
       context: .
@@ -12,23 +38,30 @@ services:
       - ./:/var/www
       - ./docker/php/local.ini:/usr/local/etc/php/conf.d/local.ini
     networks:
-      - main-network
+      - hananakellaw-network
+    depends_on:
+      - db
+      - redis
 
   webserver:
     image: nginx:alpine
     container_name: hananakellaw_webserver
     restart: unless-stopped
     ports:
-      - "8002:80"
+      - "8003:80"
     volumes:
       - ./:/var/www
       - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
     networks:
-      - main-network
+      - hananakellaw-network
     depends_on:
       - app
 
 networks:
-  main-network:
-    external: true
+  hananakellaw-network:
+    driver: bridge
+
+volumes:
+  hananakellaw_dbdata:
+    driver: local
 
