@@ -28,3 +28,6 @@ public/uploads/
 storage/logs/*.log
 storage/logs/*/*.log
 #test
+
+# Docker
+docker-compose.override.yml

@@ -1,0 +1,51 @@
+# Git
+.git
+.gitignore
+.gitattributes
+
+# Docker
+.docker
+Dockerfile
+docker-compose*.yml
+.dockerignore
+
+# IDE
+.idea
+.vscode
+*.swp
+*.swo
+*~
+
+# Node
+node_modules
+npm-debug.log
+yarn-error.log
+
+# Laravel
+/storage/*.key
+/storage/logs
+/storage/framework/cache/*
+/storage/framework/sessions/*
+/storage/framework/views/*
+/bootstrap/cache/*
+.env
+.env.backup
+.phpunit.result.cache
+Homestead.json
+Homestead.yaml
+
+# Documentation
+README.md
+README-DOCKER.md
+DEPLOYMENT.md
+*.md
+
+# Testing
+tests
+phpunit.xml
+
+# Other
+vendor
+.DS_Store
+Thumbs.db
+
