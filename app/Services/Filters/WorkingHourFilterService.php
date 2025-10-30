@@ -38,7 +38,7 @@ class WorkingHourFilterService
                 $this->filterBySearch($query, $value);
                 break;
 
-            case 'date':
+            case 'day':
                 $this->filterByDate($query, $value);
                 break;
             case 'start_time':
@@ -59,7 +59,7 @@ class WorkingHourFilterService
     private function filterBySearch($query, $value)
     {
         $query->where(function ($query) use ($value) {
-            $query->where('date', 'like', "%$value%")
+            $query->where('day', 'like', "%$value%")
                 ->orWhere('start_time', 'like', "%$value%")
                 ->orWhere('end_time', 'like', "%$value%");
         });
@@ -70,7 +70,7 @@ class WorkingHourFilterService
      */
     private function filterByDate($query, $value)
     {
-        $query->where('date', $value);
+        $query->where('day', $value);
     }
 
     /**

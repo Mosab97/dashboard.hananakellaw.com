@@ -10,8 +10,8 @@
             }
         },
         {
-                data: 'date',
-            name: 'date',
+                data: 'day',
+            name: 'day',
             orderable: true,
             searchable: true,
             render: function(data, type, row) {

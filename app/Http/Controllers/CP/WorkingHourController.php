@@ -4,6 +4,7 @@ namespace App\Http\Controllers\CP;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CP\BookAppointmentRequest;
+use App\Http\Requests\CP\WorkingHourRequest;
 use App\Models\WorkingHour;
 use App\Models\AppointmentType;
 use App\Services\Filters\WorkingHourFilterService;
@@ -41,7 +42,7 @@ class WorkingHourController extends Controller
 
         if ($request->isMethod('POST')) {
             $items = $this->_model->query()
-                ->with('appointmentType')
+                // ->with('appointmentType')
                 ->latest($this->config['table'] . '.updated_at');
 
             if ($request->input('params')) {
@@ -49,10 +50,10 @@ class WorkingHourController extends Controller
             }
 
             return DataTables::eloquent($items)
-                ->editColumn('date', function ($item) {
+                ->editColumn('day', function ($item) {
                     $route = '#';
                     return '<a href="' . $route . '" class="fw-bold text-gray-800 text-hover-primary">'
-                        . ($item->date->format('Y-m-d') ?? 'N/A') . '</a>';
+                        . ($item->day->label() ?? 'N/A') . '</a>';
                 })
                 ->editColumn('start_time', function ($item) {
                     return $item->start_time->format('H:i') ?? 'N/A';
@@ -82,7 +83,7 @@ class WorkingHourController extends Controller
                         throw $e;
                     }
                 })
-                ->rawColumns(['date', 'start_time', 'end_time', 'action'])
+                ->rawColumns(['day', 'start_time', 'end_time', 'action'])
                 ->make(true);
         }
     }
@@ -94,7 +95,7 @@ class WorkingHourController extends Controller
         return view($data['_view_path'] . '.addedit', $data);
     }
 
-    public function edit(Request $request, BookAppointment $_model)
+    public function edit(Request $request, WorkingHour $_model)
     {
         $data = $this->getCommonData('edit');
         $data['_model'] = $_model;
@@ -102,7 +103,7 @@ class WorkingHourController extends Controller
         return view($data['_view_path'] . '.addedit', $data);
     }
 
-    public function addedit(BookAppointmentRequest $request)
+    public function addedit(WorkingHourRequest $request)
     {
         Log::info('=== Starting ' . $this->config['singular_name'] . ' Add/Edit Process ===', [
             'request_data' => $request->except(['password', 'token']),
@@ -114,7 +115,7 @@ class WorkingHourController extends Controller
             $id = $request->input($this->config['id_field']);
 
             if (! empty($id)) {
-                $result = BookAppointment::findOrFail($id);
+                $result = WorkingHour::findOrFail($id);
                 $result->update($validatedData);
             } else {
                 $result = $this->_model->create($validatedData);
@@ -150,7 +151,7 @@ class WorkingHourController extends Controller
         }
     }
 
-    public function delete(Request $request, BookAppointment $_model)
+    public function delete(Request $request, WorkingHour $_model)
     {
         try {
             DB::beginTransaction();

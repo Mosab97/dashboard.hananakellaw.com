@@ -98,7 +98,7 @@
                         <thead>
                             <tr class="text-start text-muted fw-bold fs-7 text-uppercase gs-0">
                                 <th class="min-w-125px">{{ t('ID') }}</th>
-                                <th class="min-w-200px">{{ t('Date') }}</th>
+                                <th class="min-w-200px">{{ t('Day') }}</th>
                                 <th class="min-w-150px">{{ t('Start Time') }}</th>
                                 <th class="min-w-125px">{{ t('End Time') }}</th>
                                 <th class="text-end min-w-100px">{{ t('Actions') }}</th>

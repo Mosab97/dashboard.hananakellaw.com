@@ -26,7 +26,8 @@ use App\Http\Resources\API\HowWeWorkResource;
 use App\Models\HowWeWork;
 use App\Models\Article;
 use App\Http\Resources\API\ArticleResource;
-
+use App\Http\Resources\API\WorkingHourResource;
+use App\Models\WorkingHour;
 class HomeController extends Controller
 {
     public function home(Request $request)
@@ -77,6 +78,11 @@ class HomeController extends Controller
     public function appointmentTypes(Request $request)
     {
         return apiSuccess(AppointmentTypeResource::collection(AppointmentType::where('active', true)->get()));
+    }
+
+    public function workingHours(Request $request)
+    {
+        return apiSuccess(WorkingHourResource::collection(WorkingHour::orderBy('day')->get()));
     }
 
     public function bookAppointment(BookAppointmentRequest $request)

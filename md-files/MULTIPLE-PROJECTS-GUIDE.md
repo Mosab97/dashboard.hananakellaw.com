@@ -77,6 +77,116 @@ Here's how to organize ports for multiple projects:
 
 ---
 
+## Database Strategy: One DB per Project vs One Shared DB
+
+You can either run a separate MySQL/phpMyAdmin for each project (simple, isolated), or run a single shared MySQL (lighter, centralized) that all projects use.
+
+### Option A: One MySQL per Project (default in this guide)
+- Easiest to reason about; each project is fully isolated
+- Uses more resources (multiple MySQL containers)
+- Keep current `docker-compose.yml` as-is with its own `mysql` and `phpmyadmin` services
+
+### Option B: One Shared MySQL/phpMyAdmin for ALL Projects
+- Lighter on resources; one database server
+- Centralized management via one phpMyAdmin
+- You will create a dedicated MySQL stack once, then point each project to it
+
+#### Step 1: Create a dedicated shared DB stack (run once)
+Create a folder, e.g. `~/docker-shared-db`, with this `docker-compose.yml`:
+
+```yaml
+services:
+  shared-mysql:
+    image: mysql:8.0
+    container_name: shared-mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "3306:3306"   # Expose once to host
+    volumes:
+      - shared_mysql_data:/var/lib/mysql
+    networks:
+      - shared
+
+  shared-phpmyadmin:
+    image: phpmyadmin:latest
+    container_name: shared-phpmyadmin
+    restart: unless-stopped
+    environment:
+      PMA_HOST: shared-mysql
+      PMA_PORT: 3306
+    ports:
+      - "8080:80"     # One phpMyAdmin for all projects
+    networks:
+      - shared
+
+networks:
+  shared:
+    name: shared_network
+
+volumes:
+  shared_mysql_data:
+    name: shared_mysql_data
+```
+
+Bring it up:
+
+```bash
+cd ~/docker-shared-db
+docker-compose up -d
+```
+
+#### Step 2: Point each project to the shared DB
+
+In each project:
+
+1) Remove the `mysql` and `phpmyadmin` services from the project's `docker-compose.yml` (keep `app` and `nginx`).  
+2) Attach the project to the shared network and use the shared DB host name.
+
+Minimal changes to your project's `docker-compose.yml`:
+
+```yaml
+services:
+  app:
+    # ...
+    environment:
+      - DB_HOST=shared-mysql   # IMPORTANT: use the shared container name
+      - DB_PORT=3306
+      - DB_DATABASE=project1_db  # choose a unique DB per project
+      - DB_USERNAME=root        # or create users per project
+      - DB_PASSWORD=root
+    networks:
+      - shared
+
+  nginx:
+    # ...
+    networks:
+      - shared
+
+networks:
+  shared:
+    external: true
+    name: shared_network
+```
+
+3) Update your `.env` in that project:
+
+```env
+DB_HOST=shared-mysql
+DB_PORT=3306
+DB_DATABASE=project1_db   # unique per project
+DB_USERNAME=root          # or a per-project user
+DB_PASSWORD=root
+```
+
+4) Create the database via phpMyAdmin once (`http://localhost:8080`) or let migrations create it if your MySQL is configured to allow it.
+
+Notes:
+- All projects must join the same external Docker network `shared_network`.
+- Use distinct database names per project to avoid collisions.
+- You can also create distinct MySQL users per project for better isolation.
+
 ## Method 2: Quick Start/Stop Projects
 
 If you don't need both projects running simultaneously:

@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('working_hours', function (Blueprint $table) {
             $table->id();
-            $table->date('date');
-            $table->time('start_time');
-            $table->time('end_time');
+            $table->enum('day', \App\Enums\Day::toArray());
+            $table->datetime('start_time');
+            $table->datetime('end_time');
             $table->timestamps();
             $table->softDeletes();
         });
