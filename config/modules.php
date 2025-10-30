@@ -103,6 +103,24 @@ return [
             'delete' => 'delete_book_appointments',
         ],
     ],
+    'working-hours' => [
+        'table' => 'working_hours',
+        'route' => 'working-hours',
+        'full_route_name' => 'working-hours',
+        'singular_name' => 'Working Hour',
+        'plural_name' => 'Working Hours',
+        'singular_key' => 'working_hour',
+        'plural_key' => 'working_hours',
+        'view_path' => 'CP.working_hours.',
+        'id_field' => 'id',
+        'controller' => \App\Http\Controllers\CP\WorkingHourController::class,
+        'permissions' => [
+            'view' => 'view_working_hours',
+            'create' => 'create_working_hours',
+            'edit' => 'edit_working_hours',
+            'delete' => 'delete_working_hours',
+        ],
+    ],
 
 
     'why_choose_us' => [

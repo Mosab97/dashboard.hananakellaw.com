@@ -167,6 +167,16 @@ class MenuSeeder extends Seeder
             'permission_name' => config('modules.book-appointment.permissions.view'),
             'route' => config('modules.book-appointment.full_route_name') . '.index',
         ];
+        $Menu[] = [
+                'name' => t(config('modules.working-hours.plural_name'), [], 'ar'),
+            'name_en' => config('modules.working-hours.plural_name'),
+            'name_he' => config('modules.working-hours.plural_name'),
+            'route' => null,
+            'icon_svg' => '<i class="fas fa-clock"></i>', // FontAwesome icon for working hours
+            'order' => 5,
+            'permission_name' => config('modules.working-hours.permissions.view'),
+            'route' => config('modules.working-hours.full_route_name') . '.index',
+        ];
 
 
         DB::table('menus')->delete();

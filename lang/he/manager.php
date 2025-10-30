@@ -1416,4 +1416,12 @@ return [
   'Edit Book Appointment' => 'Edit Book Appointment',
   'Remove Book Appointment' => 'Remove Book Appointment',
   'Book Appointment Deleted Successfully!' => 'Book Appointment Deleted Successfully!',
+  'Search Working Hour' => 'Search Working Hour',
+  'Start Time' => 'Start Time',
+  'End Time' => 'End Time',
+  'Add Working Hour' => 'Add Working Hour',
+  'Working Hour- Add new Working Hour' => 'Working Hour- Add new Working Hour',
+  'Working Hour' => 'Working Hour',
+  '- Add new Working Hour' => '- Add new Working Hour',
+  'Working Hour Details' => 'Working Hour Details',
 ];

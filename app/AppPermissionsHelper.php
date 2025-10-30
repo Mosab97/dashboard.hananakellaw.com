@@ -159,6 +159,14 @@ class AppPermissionsHelper
             'delete' => $config['permissions']['delete'],
         ];
 
+        // working hours permissions (child of restaurants)
+        $config = config('modules.working-hours');
+        $permissions[$config['plural_name']] = [
+            'access' => $config['permissions']['view'],
+            'add' => $config['permissions']['create'],
+            'edit' => $config['permissions']['edit'],
+            'delete' => $config['permissions']['delete'],
+        ];
         $permissionFlatten = collect($permissions)->unique()->flatten(1);
         self::CheckMiddlewares($permissionFlatten);
 
