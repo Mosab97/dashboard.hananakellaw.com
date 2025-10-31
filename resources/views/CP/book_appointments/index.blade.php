@@ -96,16 +96,16 @@
                         <!--begin::Table head-->
                         <thead>
                             <tr class="text-start text-muted fw-bold fs-7 text-uppercase gs-0">
-                                <th class="min-w-125px">{{ t('ID') }}</th>
-                                <th class="min-w-200px">{{ t('Name') }}</th>
-                                <th class="min-w-150px">{{ t('Phone') }}</th>
-                                <th class="min-w-125px">{{ t('City') }}</th>
-                                <th class="min-w-125px">{{ t('Date') }}</th>
-                                <th class="min-w-125px">{{ t('Time') }}</th>
-                                <th class="min-w-125px">{{ t('Book Type') }}</th>
-                                <th class="min-w-150px">{{ t('Appointment Type') }}</th>
-                                <th class="min-w-125px">{{ t('Created At') }}</th>
-                                <th class="text-end min-w-100px">{{ t('Actions') }}</th>
+                                <th class="min-w-125px all">{{ t('ID') }}</th>
+                                <th class="min-w-200px all">{{ t('Name') }}</th>
+                                <th class="min-w-150px all">{{ t('Phone') }}</th>
+                                <th class="min-w-125px all">{{ t('City') }}</th>
+                                <th class="min-w-125px all">{{ t('Date') }}</th>
+                                <th class="min-w-125px all">{{ t('Time') }}</th>
+                                <th class="min-w-125px all">{{ t('Book Type') }}</th>
+                                <th class="min-w-150px all">{{ t('Appointment Type') }}</th>
+                                <th class="min-w-125px all">{{ t('Created At') }}</th>
+                                <th class="text-end min-w-100px all">{{ t('Actions') }}</th>
                             </tr>
                         </thead>
                         <!--end::Table head-->
