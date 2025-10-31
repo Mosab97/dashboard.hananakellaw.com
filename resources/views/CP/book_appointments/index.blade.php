@@ -101,6 +101,8 @@
                                 <th class="min-w-150px">{{ t('Phone') }}</th>
                                 <th class="min-w-125px">{{ t('City') }}</th>
                                 <th class="min-w-125px">{{ t('Date') }}</th>
+                                <th class="min-w-125px">{{ t('Time') }}</th>
+                                <th class="min-w-125px">{{ t('Book Type') }}</th>
                                 <th class="min-w-150px">{{ t('Appointment Type') }}</th>
                                 <th class="min-w-125px">{{ t('Created At') }}</th>
                                 <th class="text-end min-w-100px">{{ t('Actions') }}</th>

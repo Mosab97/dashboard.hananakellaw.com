@@ -1361,4 +1361,12 @@ return [
   'Working Day Edit Working Day' => 'Working Day Edit Working Day',
   'Edit Working Day' => 'Edit Working Day',
   'Remove Working Day' => 'Remove Working Day',
+  'Time is required' => 'Time is required',
+  'Time is not a valid time' => 'Time is not a valid time',
+  'Book type is required' => 'Book type is required',
+  'Book type is not valid' => 'Book type is not valid',
+  'Time' => 'Time',
+  'Book Type' => 'Book Type',
+  'Office' => 'Office',
+  'Zoom' => 'Zoom',
 ];

@@ -69,6 +69,18 @@ class BookAppointmentController extends Controller
                     }
                     return 'N/A';
                 })
+                ->editColumn('time', function ($item) {
+                    if ($item->time) {
+                        return $item->time->format('H:i');
+                    }
+                    return 'N/A';
+                })
+                ->editColumn('book_type', function ($item) {
+                    return $item->book_type?->label() ?? 'N/A';
+                })
+                ->editColumn('book_type', function ($item) {
+                    return $item->book_type?->label() ?? 'N/A';
+                })
                 ->addColumn('appointment_type', function ($item) {
                     return $item->appointmentType ? $item->appointmentType->name : 'N/A';
                 })

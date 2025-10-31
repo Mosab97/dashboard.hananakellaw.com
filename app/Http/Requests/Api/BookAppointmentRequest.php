@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Api;
 
+use App\Enums\BookType;
 use Illuminate\Foundation\Http\FormRequest;
 
 class BookAppointmentRequest extends FormRequest
@@ -29,6 +30,8 @@ class BookAppointmentRequest extends FormRequest
             'city' => ['required', 'string', 'max:255'],
             'appointment_type_id' => ['required', 'exists:appointment_types,id'],
             'date' => ['required', 'date'],
+            'time' => ['required', 'date_format:H:i'],
+            'book_type' => ['required', 'in:' . implode(',', BookType::toArray())],
         ];
 
         return $rules;
@@ -49,6 +52,10 @@ class BookAppointmentRequest extends FormRequest
             'appointment_type_id.exists' => t('Appointment type does not exist'),
             'date.required' => t('Date is required'),
             'date.date' => t('Date is not a valid date'),
+            'time.required' => t('Time is required'),
+            'time.date_format' => t('Time is not a valid time'),
+            'book_type.required' => t('Book type is required'),
+            'book_type.in' => t('Book type is not valid'),
         ];
     }
 }

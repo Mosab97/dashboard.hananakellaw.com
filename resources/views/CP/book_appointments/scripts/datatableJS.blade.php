@@ -1,8 +1,7 @@
 <script>
     var selectedItemsModelsRows = [];
     var selectedItemModelsData = [];
-    const columnDefs = [
-        {
+    const columnDefs = [{
             data: 'id',
             name: 'id',
             render: function(data, type, row) {
@@ -49,6 +48,24 @@
             }
         },
         {
+            data: 'time',
+            name: 'time',
+            orderable: true,
+            searchable: false,
+            render: function(data, type, row) {
+                return data || 'N/A';
+            }
+        },
+        {
+            data: 'book_type',
+            name: 'book_type',
+            orderable: true,
+            searchable: false,
+            render: function(data, type, row) {
+                return data || 'N/A';
+            }
+        },
+        {
             data: 'appointment_type',
             name: 'appointment_type',
             orderable: false,
@@ -68,8 +85,7 @@
                 }
                 return data || 'N/A';
             }
-        },
-        {
+        }, {
             data: 'action',
             name: 'action',
             orderable: false,
