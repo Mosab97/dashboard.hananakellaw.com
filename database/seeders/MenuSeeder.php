@@ -168,14 +168,14 @@ class MenuSeeder extends Seeder
             'route' => config('modules.book-appointment.full_route_name') . '.index',
         ];
         $Menu[] = [
-                'name' => t(config('modules.working-hours.plural_name'), [], 'ar'),
-            'name_en' => config('modules.working-hours.plural_name'),
-            'name_he' => config('modules.working-hours.plural_name'),
+                'name' => t(config('modules.working-day.plural_name'), [], 'ar'),
+            'name_en' => config('modules.working-day.plural_name'),
+            'name_he' => config('modules.working-day.plural_name'),
             'route' => null,
-            'icon_svg' => '<i class="fas fa-clock"></i>', // FontAwesome icon for working hours
+            'icon_svg' => '<i class="fas fa-clock"></i>', // FontAwesome icon for working day
             'order' => 5,
-            'permission_name' => config('modules.working-hours.permissions.view'),
-            'route' => config('modules.working-hours.full_route_name') . '.index',
+            'permission_name' => config('modules.working-day.permissions.view'),
+            'route' => config('modules.working-day.full_route_name') . '.index',
         ];
 
 

@@ -20,7 +20,7 @@ Route::prefix('v1')->middleware('throttle:4,1')->group(function () {});
 Route::prefix('v1')->middleware(['localization'])->group(function () {
     Route::get('/home', [HomeController::class, 'home']);
     Route::get('/appointment-types', [HomeController::class, 'appointmentTypes']);
-    Route::get('/working-hours', [HomeController::class, 'workingHours']);
+    Route::get('/working-days', [HomeController::class, 'workingDays']);
     Route::post('/book-appointment', [HomeController::class, 'bookAppointment']);
     Route::get('/articles/{article}', [HomeController::class, 'article']);
 

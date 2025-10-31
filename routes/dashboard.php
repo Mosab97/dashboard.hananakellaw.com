@@ -79,7 +79,7 @@ Route::group(['prefix' => 'dashboard'], function () {
             Route::post('/' . $config['singular_key'] . '/{Id?}', 'addedit')->name('addedit')->middleware('permission:' . $config['permissions']['create']);
         });
         // working hours child routes
-        $config = config('modules.working-hours');
+        $config = config('modules.working-day');
         Route::prefix($config['route'])->name($config['route'] . '.')->controller($config['controller'])->group(function () use ($config) {
             Route::get('/export', 'export')->name('export')->middleware('permission:' . $config['permissions']['view']);
             Route::match(['get', 'post'], '/', 'index')->name('index')->middleware('permission:' . $config['permissions']['view']);

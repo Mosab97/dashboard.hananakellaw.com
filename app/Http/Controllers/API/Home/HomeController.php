@@ -26,8 +26,9 @@ use App\Http\Resources\API\HowWeWorkResource;
 use App\Models\HowWeWork;
 use App\Models\Article;
 use App\Http\Resources\API\ArticleResource;
-use App\Http\Resources\API\WorkingHourResource;
-use App\Models\WorkingHour;
+use App\Http\Resources\API\WorkingDayResource;
+use App\Models\WorkingDay;
+
 class HomeController extends Controller
 {
     public function home(Request $request)
@@ -80,9 +81,13 @@ class HomeController extends Controller
         return apiSuccess(AppointmentTypeResource::collection(AppointmentType::where('active', true)->get()));
     }
 
-    public function workingHours(Request $request)
+    public function workingDays(Request $request)
     {
-        return apiSuccess(WorkingHourResource::collection(WorkingHour::orderBy('day')->get()));
+        $workingDays = WorkingDay::with('workingDayHours')->get()->sortBy(function($day) {
+            return $day->day->dayOfWeek();
+        })->values();
+        
+        return apiSuccess(WorkingDayResource::collection($workingDays));
     }
 
     public function bookAppointment(BookAppointmentRequest $request)

@@ -24,6 +24,18 @@ enum Day: string
             self::FRIDAY => t('Friday'),
         };
     }
+    public function dayOfWeek(): int
+    {
+        return match ($this) {
+            self::SUNDAY => 0,
+            self::MONDAY => 1,
+            self::TUESDAY => 2,
+            self::WEDNESDAY => 3,
+            self::THURSDAY => 4,
+            self::FRIDAY => 5,
+            self::SATURDAY => 6,
+        };
+    }
 
     public static function toArray(): array
     {

@@ -160,7 +160,7 @@ class AppPermissionsHelper
         ];
 
         // working hours permissions (child of restaurants)
-        $config = config('modules.working-hours');
+        $config = config('modules.working-day');
         $permissions[$config['plural_name']] = [
             'access' => $config['permissions']['view'],
             'add' => $config['permissions']['create'],

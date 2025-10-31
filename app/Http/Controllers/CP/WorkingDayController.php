@@ -4,16 +4,16 @@ namespace App\Http\Controllers\CP;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CP\BookAppointmentRequest;
-use App\Http\Requests\CP\WorkingHourRequest;
-use App\Models\WorkingHour;
+use App\Http\Requests\CP\WorkingDayRequest;
+use App\Models\WorkingDay;
 use App\Models\AppointmentType;
-use App\Services\Filters\WorkingHourFilterService;
+use App\Services\Filters\WorkingDayFilterService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Yajra\DataTables\Facades\DataTables;
 
-class WorkingHourController extends Controller
+class WorkingDayController extends Controller
 {
     protected $filterService;
 
@@ -22,10 +22,10 @@ class WorkingHourController extends Controller
     private $config;
 
     public function __construct(
-        WorkingHour $_model,
-        WorkingHourFilterService $filterService,
+        WorkingDay $_model,
+        WorkingDayFilterService $filterService,
     ) {
-        $this->config = config('modules.working-hours');
+        $this->config = config('modules.working-day');
         $this->_model = $_model;
         $this->filterService = $filterService;
 
@@ -42,7 +42,7 @@ class WorkingHourController extends Controller
 
         if ($request->isMethod('POST')) {
             $items = $this->_model->query()
-                // ->with('appointmentType')
+                ->with('workingDayHours')
                 ->latest($this->config['table'] . '.updated_at');
 
             if ($request->input('params')) {
@@ -55,12 +55,6 @@ class WorkingHourController extends Controller
                     return '<a href="' . $route . '" class="fw-bold text-gray-800 text-hover-primary">'
                         . ($item->day->label() ?? 'N/A') . '</a>';
                 })
-                ->editColumn('start_time', function ($item) {
-                    return $item->start_time->format('H:i') ?? 'N/A';
-                })
-                ->editColumn('end_time', function ($item) {
-                    return $item->end_time->format('H:i') ?? 'N/A';
-                })
                 ->editColumn('created_at', function ($item) {
                     if ($item->created_at) {
                         return [
@@ -68,6 +62,18 @@ class WorkingHourController extends Controller
                             'timestamp' => $item->created_at->timestamp,
                         ];
                     }
+                })
+                ->addColumn('start_time', function ($item) {
+                    $hours = $item->workingDayHours->map(function($hour) {
+                        return $hour->start_time->format('H:i');
+                    })->toArray();
+                    return implode('<br>', $hours) ?: 'N/A';
+                })
+                ->addColumn('end_time', function ($item) {
+                    $hours = $item->workingDayHours->map(function($hour) {
+                        return $hour->end_time->format('H:i');
+                    })->toArray();
+                    return implode('<br>', $hours) ?: 'N/A';
                 })
                 ->addColumn('action', function ($item) {
                     try {
@@ -95,15 +101,16 @@ class WorkingHourController extends Controller
         return view($data['_view_path'] . '.addedit', $data);
     }
 
-    public function edit(Request $request, WorkingHour $_model)
+    public function edit(Request $request, WorkingDay $_model)
     {
+        $_model->load('workingDayHours');
         $data = $this->getCommonData('edit');
         $data['_model'] = $_model;
 
         return view($data['_view_path'] . '.addedit', $data);
     }
 
-    public function addedit(WorkingHourRequest $request)
+    public function addedit(WorkingDayRequest $request)
     {
         Log::info('=== Starting ' . $this->config['singular_name'] . ' Add/Edit Process ===', [
             'request_data' => $request->except(['password', 'token']),
@@ -111,15 +118,38 @@ class WorkingHourController extends Controller
         ]);
 
         try {
+            DB::beginTransaction();
+            
             $validatedData = $request->validated();
+            $hours = $request->input('hours', []);
             $id = $request->input($this->config['id_field']);
 
             if (! empty($id)) {
-                $result = WorkingHour::findOrFail($id);
+                $result = WorkingDay::findOrFail($id);
                 $result->update($validatedData);
             } else {
                 $result = $this->_model->create($validatedData);
             }
+
+            // Handle working day hours
+            if (!empty($hours)) {
+                // Delete existing hours
+                $result->workingDayHours()->delete();
+                
+                // Create new hours
+                foreach ($hours as $hour) {
+                    if (!empty($hour['start_time']) && !empty($hour['end_time'])) {
+                        // Convert time to datetime for storage
+                        $today = now()->format('Y-m-d');
+                        $result->workingDayHours()->create([
+                            'start_time' => $today . ' ' . $hour['start_time'] . ':00',
+                            'end_time' => $today . ' ' . $hour['end_time'] . ':00',
+                        ]);
+                    }
+                }
+            }
+
+            DB::commit();
 
             if ($request->ajax()) {
                 return response()->json([
@@ -134,6 +164,7 @@ class WorkingHourController extends Controller
                 ->route($this->config['full_route_name'] . '.edit', ['_model' => $result->id])
                 ->with('status', t($this->config['singular_name'] . ' Added Successfully!'));
         } catch (\Exception $e) {
+            DB::rollBack();
             Log::error('Error in ' . $this->config['singular_name'] . ' add/edit process', [
                 'error' => $e->getMessage(),
                 'trace' => $e->getTraceAsString(),
@@ -151,7 +182,7 @@ class WorkingHourController extends Controller
         }
     }
 
-    public function delete(Request $request, WorkingHour $_model)
+    public function delete(Request $request, WorkingDay $_model)
     {
         try {
             DB::beginTransaction();
